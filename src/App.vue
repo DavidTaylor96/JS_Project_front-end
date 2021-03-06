@@ -9,13 +9,15 @@
 <script>
 import emissionsForm from '@/components/emissionsForm.vue';
 import emissionGrid from '@/components/emissionGrid.vue';
+import emissionsChart from '@/components/emissionsChart.vue'
 
 
 export default {
   name: 'App',
   components: {
     'emissions-form' : emissionsForm,
-    'emissons-chart' : emissionGrid
+    'emissons-grid' : emissionGrid,
+    'emissions-chart': emissionsChart
   
   }
 }
