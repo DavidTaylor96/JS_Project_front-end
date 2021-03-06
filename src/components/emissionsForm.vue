@@ -52,6 +52,8 @@
 
 <script>
 import {eventBus} from '@/main.js'
+import userData from '@/services/userData.js'
+
 export default {
     name: 'emissions-form',
 
