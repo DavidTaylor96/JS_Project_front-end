@@ -23,7 +23,7 @@ export default{
     .then(res => res.json());
   },
 
-  deleteBooking(id) {
+  deleteUserData(id) {
     return fetch(baseURL + id, {
       method: 'DELETE'
     })

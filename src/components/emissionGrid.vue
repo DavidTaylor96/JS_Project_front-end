@@ -3,6 +3,10 @@
 </template>
 
 <script>
+import EmissionsForm from './emissionsForm.vue'
+import { eventBus } from '@/main.js'
+import { Chart } from 'chart.js'
+
 export default {
 
 }
