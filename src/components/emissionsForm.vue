@@ -29,6 +29,7 @@
                     <option value="vegetarian">Vegetarian</option>
                     <option value="vegan">Vegan</option>
                 </select>
+                <input type="submit" value="Submit Diet Details" id="save" />
         </section>
         <section class="energy-form">
             <h2>Energy Usage</h2>
