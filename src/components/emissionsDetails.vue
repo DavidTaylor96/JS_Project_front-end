@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="data-wrap">
+       <!-- <div class="data-wrap">
             <h2>Transport</h2>
             <p>Your Input:{{userData.car}}miles - Carbon Emissions: {{this.carCalc}}kg</p>
             <p>{{userData.train}}</p>
@@ -29,7 +29,7 @@
         <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
 
         <button v-on:click="updateUserData">Update User Data</button>
-        <button type="button" class="update-button" v-on:click="updateUserData">Update User Data></button>
+        <button type="button" class="update-button" v-on:click="updateUserData">Update User Data></button>-->
     </div>
 </template>
 
@@ -37,10 +37,12 @@
 
 import{eventBus} from '@/main.js'
 import emissionGrid from '@/components/emissionGrid.vue'
+import userData from '@/services/userData'
+import emissionsFactors from '@/services/emissionsDataServices'
 
 export default {
     name: 'emission-details',
-    props: [],    
+    props: ['data'],    
     methods: {
         deleteUserData() {
             userData.deleteUserData(this.userData._id)
@@ -53,11 +55,15 @@ export default {
     },
     computed: {
         carTotal(){
-            let total = this.userData.car * this.emissinsFactor.car 
+            let total = this.data.car * 10
             return total
             console.log(total)
         },
-    }
+    },
+    components: { 
+      'emission-factors': emissionsFactors,
+      'user-data': userData
+      },
 }
 </script>
 

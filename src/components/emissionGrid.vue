@@ -1,6 +1,6 @@
 <template>
   <article>
-      <emission-details></emission-details>
+      <emission-details :data="data"></emission-details>
   </article>
 </template>
 
@@ -14,13 +14,20 @@ export default {
   name:'emissions-grid',
     data () {
         return {
+          data: []
 
         };
     },
   components: { 
-      'emission-details' : emissionsDetails 
+      'emission-details' : emissionsDetails ,
+      'emission-factors': emissionsFactors,
+      'user-data': userData
 
       },
+    mounted(){
+      emissionsFactors.getEmissionFactor()
+        .then(emissionsFactors => this.data = emissionsFactors)
+    }
 
 }
 </script>
