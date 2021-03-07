@@ -16,7 +16,7 @@
                 <input type="submit" value="Submit Transport Details" id="save" />     
             </form>
         </section>
-        <!-- <section class="diet-form">
+        <section class="diet-form">
             <h2>Diet</h2>
             <form class="diet" v-on:submit="addDietData" method="post">
                 <label for="diet-select"> Select a Diet Type:</label>
@@ -30,22 +30,23 @@
                     <option value="vegan">Vegan</option>
                 </select>
                 <input type="submit" value="Submit Diet Details" id="save" />
+            </form>
         </section>
         <section class="energy-form">
-            <h2>Energy Usage</h2>
-            <form class="energy" v-on:submit="addTransportData" method="post">
-                <label for="electricity">Electricity</label>
-                <input type="number" id="electricity" v-model.number="electricity-input"/>
+           <h2>Energy Usage</h2>
+            <form class="energy" v-on:submit="addData" method="post">
+                <label for="electricity">Electricity:</label>
+                <input type="number" id="electricity" v-model.number="electricityInput"/>
+             
+                <label for="gas">Gas:</label>
+                <input type="number" id="gas" v-model.number="gasInput"/>
 
-                <label for="gas">Gas</label>
-                <input type="number" id="gas" v-model.number="gas-input"/>
+                <label for="oil">Oil:</label>
+                <input type="number" id="oil" v-model.number="oilInput"/>
 
-                <label for="oil">Oil</label>
-                <input type="number" id="oil" v-model.number="oil-input"/>
-
-                <input type="submit" value="Submit Energy Values" id="save" />
+                <input  type="submit" value="Submit Energy Values" id="save" />
             </form>
-        </section> -->
+        </section>
 
     </article>
   
@@ -64,6 +65,15 @@ export default {
             train: null,
             bus: null,
             plane: null,
+            electricity: null,
+            gas: null,
+            oil: null,
+            highMeat: null,
+            mediumMeat: null,
+            lowMeat: null,
+            pescatarian: null,
+            vegetarian: null,
+            vegan: null
         }
     },
 
@@ -78,6 +88,29 @@ export default {
             }
             userData.postUserData(transport)
             .then(res => eventBus.$emit('transport-emissions', res))
+        },
+        addEnergyData(evt){
+            evt.preventDefault()
+            const energy = {
+                electricity: this.electricity,
+                gas: this.gas,
+                oil: this.oil
+            }
+            userData.postUserData(energy)
+            .then(res => eventBus.$emit('energy-emissions', res))
+        },
+        addDietData(evt){
+            evt.preventDefault()
+            const diet = {
+                highMeat: this.highMeat,
+                mediumMeat: this.mediumMeat,
+                lowMeat: this.lowMeat,
+                pescatarian: this.pescatarian,
+                vegetarian: this.vegetarian,
+                vegan: this.vegan
+            }
+            userData.portUserData(diet)
+            .then(res => eventBus.$emit('diet-emissions', res))
         }
     },
 
