@@ -11,32 +11,12 @@
 const $ = typeof window !== 'undefined' ?  require('jquery-easing') : null;
 export default {
   props : {
-    co2Emitted: {
-        type: Number,
-        required: true,
-        default : 0.25
-    },
-    scale: {
-      type: Number,
-      required: true,
-      default: 100
-    },
-    size: {
-        type: Number,
-        required: false,
-        default : 150
-    },
-    insertMode:{
-      type : String,
-    },
-    showPercent:{
-      type : Boolean,
-      default : true
-    },
-    showEmissions:{
-      type : Boolean,
-      default : true
-    },
+    co2Emitted: {},
+    scale: {},
+    size: {},
+    insertMode:{},
+    showPercent:{},
+    showEmissions:{ default : true },
   },
   mounted(){
     require('jquery-circle-progress');
@@ -58,7 +38,7 @@ export default {
         return
       }else{
         (vm.showEmissions && vm.showPercent) 
-        $(self).find('p.Emissions-precent').html(Math.floor(value*vm.scale)+"%");
+        $(self).find('p.Emissions-precent').html(Math.floor(value*vm.scale)+"kg");
       }
     }
   },

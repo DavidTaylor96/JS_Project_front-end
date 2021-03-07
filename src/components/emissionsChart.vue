@@ -1,20 +1,14 @@
 <template>
   <div id="app">
       <vue-circle
-        ref="myprogress"
+        ref="co2produced"
         :co2Emitted="userData"
         :size="150"
-        :reverse="false"
-        :fill="fill"
-        :scale="100"
-        empty-fill="grey"
-        :start-angle="0"
+        :scale="654"
         insert-mode="append"
-        :animation="{ duration: 1200}"
-        :thickness="10"
         @vue-circle-progress="progress"
         >
-        <p style="margin-top:0;font-size:12px;">Co2 Emittied</p>
+        <p id="tag" >Co2 Emittied</p>
       </vue-circle>
   </div>
 </template>
@@ -27,20 +21,23 @@
     },
     data(){
       return{
-        fill : { gradient: ["green", "red"] },
-        userData:50
+        fill : { gradient: ["green"] },
+        userData: 200
       }
     },
     methods:{
-      progress(co2Emitted){
-        console.log(co2Emitted);
-        if (co2Emitted > 110) {
-          this.$refs.myprogress.updateFill('red');
+      progress(progress){
+        if (progress > 654) {
+          this.$refs.co2produced.updateFill("red");
         }
       }
     },
   }
 </script>
 <style scoped>
+#tag{
+  margin: 0;
+  font-size: 13px;
+}
 
 </style>

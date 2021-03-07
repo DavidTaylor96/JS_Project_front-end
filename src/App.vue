@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-     <emissions-chart></emissions-chart>
+    <h1 id="header">Try-Atomic</h1>
+     <emissions-chart id="chart"></emissions-chart>
     <emissions-form></emissions-form>
     
   </div>
@@ -24,5 +25,13 @@ export default {
 </script>
 
 <style>
+#header{
+  text-align: center;
+  font-weight: 100;
+}
+
+#chart{
+  text-align: center;
+}
 
 </style>
