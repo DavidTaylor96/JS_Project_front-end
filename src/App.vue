@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+     <emissions-chart></emissions-chart>
     <emissions-form></emissions-form>
-    <emissions-chart></emissions-chart>
     
   </div>
 </template>

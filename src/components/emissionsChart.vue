@@ -27,14 +27,14 @@
     },
     data(){
       return{
-        fill : { gradient: ["green"] },
+        fill : { gradient: ["green", "red"] },
         userData:50
       }
     },
     methods:{
-      progress(co2Produced){
-        console.log(co2Produced);
-        if (co2Produced > 110) {
+      progress(co2Emitted){
+        console.log(co2Emitted);
+        if (co2Emitted > 110) {
           this.$refs.myprogress.updateFill('red');
         }
       }
