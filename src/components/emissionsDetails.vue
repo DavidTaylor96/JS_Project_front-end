@@ -39,11 +39,11 @@ import{eventBus} from '@/main.js'
 import emissionGrid from '@/components/emissionGrid.vue'
 
 export default {
-    name: 'view-userData',
-    props: ['userData'],
+    name: 'emission-details',
+    props: [''],
     methods: {
         deleteUserData() {
-            UserData.deleteUserData(this.userData._id)
+            userData.deleteUserData(this.userData._id)
             .then(() => eventBus.$emit('userData-deleted', this.userData._id))
         },
         updateUserData() {
