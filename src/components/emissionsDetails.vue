@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="data-wrap">
             <h2>Transport</h2>
             <p>{{userData.car}}</p>
             <p>{{userData.train}}</p>
@@ -8,7 +8,7 @@
             <p>{{userData.plane}}</p>
         </div>
 
-        <div>
+        <div class="data-wrap">
             <h2>Food</h2>
             <p>{{userData.highMeat}}</p>
             <p>{{userData.mediumMeat}}</p>
@@ -18,7 +18,7 @@
             <p>{{userData.vegan}}</p>
         </div>
 
-        <div>
+        <div class="data-wrap">
             <h2>Energy Usage</h2>
             <p>{{userData.gas}}</p>
             <p>{{userData.oil}}</p>
@@ -26,10 +26,10 @@
         </div>
 
         <button v-on:click="deleteUserData">Delete User Data</button>
-        <button type="button" v-on:click="deleteUserData">Delete User Data</button>
+        <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
 
         <button v-on:click="updateUserData">Update User Data</button>
-        <button type="button" v-on:click="updateUserData">Update User Data></button>
+        <button type="button" class="update-button" v-on:click="updateUserData">Update User Data></button>
     </div>
 </template>
 
@@ -40,7 +40,7 @@ import emissionGrid from '@/components/emissionGrid.vue'
 
 export default {
     name: 'emission-details',
-    props: [''],
+    props: [],    
     methods: {
         deleteUserData() {
             userData.deleteUserData(this.userData._id)
@@ -55,5 +55,17 @@ export default {
 </script>
 
 <style scoped>
+
+.delete-button {
+    background: yellow; 
+}
+
+.update-button {
+    background: yellow;
+}
+
+.data-wrap {
+    border: 2px solid black;
+}
 
 </style>
