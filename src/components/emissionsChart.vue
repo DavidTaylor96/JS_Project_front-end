@@ -52,15 +52,14 @@ export default {
 
 </style> -->
 
-<template>
+<!--<template>
   <radial-progress-bar 
      :diameter="200"
-     :transport-traveled="Transport"
-     :energy-used="Energy"
-     :food-eaten="Food">
-   <p>Transport: {{ Transport }}kg</p>
-   <p>Energy: {{ Energy }}kg</p>
-   <p>Food: {{ Food }}kg</p>
+     :transport-traveled="transport"
+     :energy-used="energy"
+     :food-eaten="food"
+     :Total="Total">
+   <p v-for="(user, index) in users" :key="index">Total: {{ user.total }}kg</p>
   </radial-progress-bar>
 </template>
  
@@ -70,9 +69,9 @@ import RadialProgressBar from 'vue-radial-progress'
 export default {
   data () {
     return {
-      Transport: 10,
-      Energy: 5,
-      Food: 0.2,
+      users:[
+      { total: 10 },
+      ]
     }
   },
  
@@ -80,5 +79,103 @@ export default {
     RadialProgressBar
   }
 }
+</script>-->
+
+<!--<template>
+   	<div class="box">
+ 		 <ul>
+ 		 	<li v-for="(user, index) in users" :key="index">
+ 		 		<div class="lang">{{user.lang}}</div>
+ 				<div class="bar">
+ 					<div class="progress" v-bind:style = "{'background':user.color, 'width':user.percent+''}"></div>
+ 		 			<span class="percent">{{user.percent}}%</span>
+ 				</div>
+ 		 	</li>
+ 		 </ul>
+ 	</div>
+</template>
+
+<script>
+export default {
+ 			el:".box",
+ 			data (){
+        return {
+ 				users:[
+ 				{ lang:"Food",      	percent:90,   color:"#ec407a"	},
+				{ lang:"Energy", 			percent:76,   color:"#f4511e"	},
+				{ lang:"Transport", 	percent:84,   color:"#512da8"	},
+ 			 ]
+      }
+ 		}
+}
 </script>
 
+<style>
+
+.box{
+	width: 800px;
+	padding: 40px;
+	margin:50px auto;
+}
+
+ul li{
+	list-style-type: none;
+	padding:10px;
+}
+
+.lang{
+	margin:5px;
+	font-size: 20px;
+}
+
+.bar{
+	width: 100%;
+	background:#dfdfdf;
+	overflow: hidden;
+	padding:5px;
+}
+
+.progress{
+	float:left;
+	padding:15px;
+}
+
+</style>-->
+<template>
+  <div>
+    <vue-ellipse-progress 
+      :data="circles"                    
+      :progress="TotalDone"
+      color="blue"
+      :colorFill="colorFillGradient"
+      :size="180"
+      :thickness="7"
+      :empty-thickness="3"
+      :Co2-max-value="co2Emittied"
+      animation="reverse 700 400" 
+      fontSize="1.5rem"
+      :loading="loading"
+      :no-data="no-data"
+      >
+      
+      <span slot="Co2-max-value">/200</span>
+      <p slot="legend-caption">Total</p>
+    
+    </vue-ellipse-progress>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'emissions-chart',
+  data() {
+    return{
+      co2Emittied: 125,
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
