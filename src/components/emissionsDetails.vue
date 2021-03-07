@@ -2,7 +2,7 @@
     <div>
         <div class="data-wrap">
             <h2>Transport</h2>
-            <p>{{userData.car}}</p>
+            <p>Your Input:{{userData.car}}miles - Carbon Emissions: {{this.carCalc}}kg</p>
             <p>{{userData.train}}</p>
             <p>{{userData.bus}}</p>
             <p>{{userData.plane}}</p>
@@ -50,6 +50,13 @@ export default {
             userData.updateUserData(this.userData._id)
             .then(() => eventBus.$emit('userData-updated', this.userData._id))
         }
+    },
+    computed: {
+        carTotal(){
+            let total = this.userData.car * this.emissinsFactor.car 
+            return total
+            console.log(total)
+        },
     }
 }
 </script>
