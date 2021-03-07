@@ -1,11 +1,11 @@
-const baseURL = "http://localhost:3000/api/emissions/users"
+const baseURL = "http://localhost:3000/api/userData"
 
 export default{
   getUserData(){
     return fetch(baseURL)
     .then(res => res.json())
   },
-  postUserData(){
+  postUserData(payload){
     return fetch(baseURL, {
       method: 'POST',
       body: JSON.stringify(payload),
