@@ -4,8 +4,6 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-// import VueEllipseProgress from 'vue-ellipse-progress';
-// Vue.use(VueEllipseProgress);
 
 export const eventBus = new Vue();
 
