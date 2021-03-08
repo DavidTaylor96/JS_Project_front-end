@@ -30,7 +30,7 @@ import emissionGrid from '@/components/emissionGrid.vue';
 export default {
   data () {
     return {
-      co2Emitted : 22,
+      co2Emitted : 10,
       maxCo2Produced: 22,
       startColor: "lightgreen",
       stopColor: "green",
@@ -42,10 +42,6 @@ export default {
     }
   },
 
-  // mounted:{
-  //   this.progress()
-  // },
-
   props: [],
 
   watch:{
@@ -55,6 +51,11 @@ export default {
      }else{
        this.startColor = "lightgreen"
      }
+   },
+   maxCo2Produced: function(){
+    if (this.co2Emitted === this.maxCo2Produced){
+      this.innerStrokeColor = "red"
+    }
    }
   },
   computed:{
