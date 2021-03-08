@@ -2,10 +2,10 @@
     <article>
        <div class="data-wrap" v-if="data" >
             <h2>Transport</h2>
-            <p>Car: {{data.car ? `${data.car} miles`: "No Information" }} - Carbon Emissions: {{carTotal}} </p>
-            <p>Train: {{data.train ? `${data.train} miles`: "No Information"}}  - Carbon Emissions: {{trainTotal}}</p>
-            <p>Bus: {{data.bus ? `${data.bus} miles`: "No Information"}}  - Carbon Emissions: {{busTotal}}</p>
-            <p>Plane: {{data.plane ? `${data.plane} miles`: "No Information"}}  - Carbon Emissions: {{planeTotal}}</p>
+            <p v-if="data.car">Car: {{data.car}} miles - Carbon Emissions: {{carTotal}} </p>
+            <p v-if="data.train">Train: {{data.train }} miles - Carbon Emissions: {{trainTotal}}</p>
+            <p v-if="data.bus">Bus: {{data.bus}} miles - Carbon Emissions: {{busTotal}}</p>
+            <p v-if="data.plane">Plane: {{data.plane}} miles - Carbon Emissions: {{planeTotal}}</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
@@ -24,8 +24,8 @@
 
         <div class="data-wrap" v-if="data">
             <h2>Energy Usage</h2>
-            <p> Electricity Used: {{data.electricity ? `${data.electricity} kWh`: "No Information"}}  - Carbon Emissions: {{electricityTotal}}</p>
-            <p> Gas Used: {{data.gas ? `${data.gas} kWh`: "No Information"}}  - Carbon Emissions: {{gasTotal}}</p>
+            <p v-if="data.electricity"> Electricity Used: {{data.electricity}} kWh - Carbon Emissions: {{electricityTotal}}</p>
+            <p v-if="data.gas"> Gas Used: {{data.gas}} kWh - Carbon Emissions: {{gasTotal}}</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>    
