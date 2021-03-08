@@ -5,13 +5,13 @@
             <p>Please enter the distance traveled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="car">Car</label>
-                <input type="number" id="car" class="inputs" v-model.number="carInput"/>
+                <input type="number" id="car" class="inputs" v-model.number="car"/>
                 <label for="train">Train</label>
-                <input type="number" id="train" class="inputs" v-model.number="trainInput"/>
+                <input type="number" id="train" class="inputs" v-model.number="train"/>
                 <label for="bus">Bus</label>
-                <input type="number" id="bus" class="inputs" v-model.number="busInput"/>
+                <input type="number" id="bus" class="inputs" v-model.number="bus"/>
                 <label for="plane">Plane</label>
-                <input type="number" id="plane" class="inputs" v-model.number="planeInput"/> 
+                <input type="number" id="plane" class="inputs" v-model.number="plane"/> 
 
                 <input type="submit" value="Submit Transport" class="transport-button" id="save" />     
             </form>
@@ -37,15 +37,15 @@
         </section>
         <section class="energy-form base-form">
            <h2>Energy Usage</h2>
-            <form class="energy" v-on:submit="addData" method="post">
+            <form class="energy" v-on:submit="addEnergyData" method="post">
                 <label for="electricity">Electricity:</label>
-                <input type="number" id="electricity"  class="inputs" v-model.number="electricityInput"/>
+                <input type="number" id="electricity"  class="inputs" v-model.number="electricity"/>
              
                 <label for="gas">Gas:</label>
-                <input type="number" id="gas" class="inputs" v-model.number="gasInput"/>
+                <input type="number" id="gas" class="inputs" v-model.number="gas"/>
 
                 <label for="oil">Oil:</label>
-                <input type="number" id="oil" class="inputs" v-model.number="oilInput"/>
+                <input type="number" id="oil" class="inputs" v-model.number="oil"/>
 
                 <input  type="submit" value="Submit Energy" class="energy-button" id="save" />
             </form>
