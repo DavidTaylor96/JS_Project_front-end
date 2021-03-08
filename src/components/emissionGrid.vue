@@ -1,6 +1,6 @@
 <template>
   <article>
-      <emission-details :data="data"></emission-details>
+      <emission-details v-for="(data, index) in emissionData" :key="index" :data="data"></emission-details>
   </article>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   name:'emissions-grid',
     data () {
         return {
-          data: []
+          emissionData: []
 
         };
     },

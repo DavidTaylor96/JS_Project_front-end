@@ -23,12 +23,12 @@
                 <label for="diet-select"> Select a Diet Type:</label>
 
                 <select name="diet-select" id="diet-select" class="inputs-diet">
-                    <option value="highMeat">High Meat</option>
-                    <option value="mediumMeat">Medium Meat</option>
-                    <option value="lowMeat">Low Meat</option>
-                    <option value="pescatarian">Pescatarian</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="vegan">Vegan</option>
+                    <option value="highMeat" v-model="highMeat">High Meat</option>
+                    <option value="mediumMeat" v-model="mediumMeat">Medium Meat</option>
+                    <option value="lowMeat" v-model="lowMeat">Low Meat</option>
+                    <option value="pescatarian" v-model="pescatarian">Pescatarian</option>
+                    <option value="vegetarian" v-model="vegetarian">Vegetarian</option>
+                    <option value="vegan" v-model="vegan">Vegan</option>
                 </select>
                 
                 <input type="submit" value="Submit Diet" class="diet-button" id="save" />
