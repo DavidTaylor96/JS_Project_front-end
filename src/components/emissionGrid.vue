@@ -36,8 +36,8 @@ export default {
       userData.getUserData()
         .then(result => this.emissionData = result)
 
-      eventBus.$on("user-emissions", (transport) => {
-            this.emissionData.push(transport)
+      eventBus.$on("user-emissions", (data) => {
+            this.emissionData.push(data)
         })
     }
 

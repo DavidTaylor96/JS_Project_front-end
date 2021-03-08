@@ -3,30 +3,29 @@
        <div class="data-wrap" v-if="data" >
             <h2>Transport</h2>
             <p>Car: {{data.car ? `${data.car} miles`: "No Information" }} - Carbon Emissions: {{carTotal}} </p>
-            <p>Train: {{data.train}} miles - Carbon Emissions:</p>
-            <p>Bus: {{data.bus}} miles - Carbon Emissions:</p>
-            <p>Plane: {{data.plane}} miles - Carbon Emissions:</p>
+            <p>Train: {{data.train ? `${data.train} miles`: "No Information"}}  - Carbon Emissions: {{trainTotal}}</p>
+            <p>Bus: {{data.bus ? `${data.bus} miles`: "No Information"}}  - Carbon Emissions: {{busTotal}}</p>
+            <p>Plane: {{data.plane ? `${data.plane} miles`: "No Information"}}  - Carbon Emissions: {{planeTotal}}</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Food</h2>
-            <p>Diet Choice: {{data.highMeat}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.mediumMeat}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.lowMeat}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.pescatarian}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.vegetarian}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.vegan}} - Carbon Emissions:</p>
+            <p v-if="data.highMeat">High Meat - Carbon Emissions: {{data.highMeat}}</p>
+            <p v-if="data.lowMeat">Low Meat - Carbon Emissions: {{data.lowMeat}}</p>
+            <p v-if="data.mediumMeat">Medium Meat - Carbon Emissions: {{data.mediumMeat}}</p>
+            <p v-if="data.pescatarian">Pescatarian - Carbon Emissions: {{data.pescatarian}}</p>
+            <p v-if="data.vegetarian">Vegetarian - Carbon Emissions: {{data.vegetarian}}</p>
+            <p v-if="data.vegan">Vegan - Carbon Emissions: {{data.vegan}}</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Energy Usage</h2>
-            <p> Energy Useage: {{data.gas}}kWh - Carbon Emissions:</p>
-            <p> Energy Useage: {{data.oil}}kWh - Carbon Emissions:</p>
-            <p> Energy Useage: {{data.electricity}}Litres - Carbon Emissions:</p>
+            <p> Electricity Used: {{data.electricity ? `${data.electricity} kWh`: "No Information"}}  - Carbon Emissions: {{electricityTotal}}</p>
+            <p> Gas Used: {{data.gas ? `${data.gas} kWh`: "No Information"}}  - Carbon Emissions: {{gasTotal}}</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>    
@@ -57,6 +56,41 @@ export default {
         carTotal(){
             let total = this.data.car * this.factor.transport.car
             if (this.data.car){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        trainTotal(){
+            let total = this.data.train * this.factor.transport.train
+            if (this.data.train){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        busTotal(){
+            let total = this.data.bus * this.factor.transport.bus
+            if (this.data.bus){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        planeTotal(){
+            let total = this.data.plane * this.factor.transport.plane
+            if (this.data.plane){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        electricityTotal(){
+            let total = this.data.electricity * this.factor.energy.electricity
+            if (this.data.electricity){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+         gasTotal(){
+            let total = this.data.gas * this.factor.energy.gas
+            if (this.data.gas){
                 return `${total}kg`}else{
                     return "No Data Entered"
                 }
