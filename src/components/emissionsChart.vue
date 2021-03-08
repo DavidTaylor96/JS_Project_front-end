@@ -8,7 +8,9 @@
         :stopColor="stopColor"
         :innerStrokeColor="innerStrokeColor"
         :animateSpeed="animateSpeed"
-        :timingFunc="timingFunc">
+        :timingFunc="timingFunc"
+        :fps="fps"
+        :isClockwise="isClockwise">
     <div class="inner-text">
       <h3>{{ maxCo2Produced }}kg</h3>
       <p id="inner-texts">Max per day</p>
@@ -23,29 +25,49 @@
  
 <script>
 import RadialProgressBar from 'vue-radial-progress'
- 
+import emissionGrid from '@/components/emissionGrid.vue';
+
 export default {
   data () {
     return {
-      co2Emitted : 10,
+      co2Emitted : 22,
       maxCo2Produced: 22,
       startColor: "lightgreen",
       stopColor: "green",
       innerStrokeColor: "lightgray",
-      animateSpeed: 1000,
-      timingFunc: "liner"
+      animateSpeed: 2000,
+      timingFunc: "linear",
+      fps: 60,
+      isClockwise: true
     }
   },
+
+  // mounted:{
+  //   this.progress()
+  // },
+
   props: [],
-  methods:{
-    progress(progress){
-      if (progress > 22) {
-        return this.startColor = "red"
-      }
+
+  watch:{
+   co2Emitted: function(){
+     if (this.co2Emitted > 20){
+       this.startColor = "red"
+     }else{
+       this.startColor = "lightgreen"
+     }
+   }
+  },
+  computed:{
+    animationIncrements () {
+      return 1000/ this.fps
+    },
+    totalPoints(){
+      return this.animateSpeed /this.animationIncrements
     }
   },
   components: {
-    RadialProgressBar
+    RadialProgressBar,
+    'emissions-grid' : emissionGrid,
   }
 }
 </script>
