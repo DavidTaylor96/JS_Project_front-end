@@ -2,6 +2,7 @@
     <article>
         <section class="transport-form base-form">
             <h2>Transport</h2>
+            <button class="info-button"><span>Index</span></button>
             <p>Please enter the distance traveled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="car">Car</label>
@@ -16,6 +17,7 @@
                 <input type="submit" value="Submit Transport" class="transport-button" id="save" />     
             </form>
         </section>
+
         <section class="diet-form base-form">
             <h2>Diet</h2>
             
@@ -35,6 +37,7 @@
                 
             </form>
         </section>
+
         <section class="energy-form base-form">
            <h2>Energy Usage</h2>
             <form class="energy" v-on:submit="addEnergyData" method="post">
@@ -195,6 +198,24 @@ export default {
     flex-flow: column wrap;
     align-items: center;
 }
+
+.info-button {
+    display: block;
+    border-color: yellowgreen;
+    border-width: thin;
+    border-radius: 25px;
+
+    align-items: center;
+    margin: auto;
+    height: 3vh;
+    width: 6vh;
+
+}
+.info-button:hover {
+    display: block;
+    background-color: yellowgreen;
+ }
+
 
 
 </style>
