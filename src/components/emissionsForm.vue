@@ -90,7 +90,7 @@ export default {
                 plane: this.plane
             }
             userData.postUserData(transport)
-            .then(res => eventBus.$emit('transport-emissions', res))
+            .then(res => eventBus.$emit('user-emissions', res))
         },
         addEnergyData(evt){
             evt.preventDefault()
@@ -100,7 +100,7 @@ export default {
                 oil: this.oil
             }
             userData.postUserData(energy)
-            .then(res => eventBus.$emit('energy-emissions', res))
+            .then(res => eventBus.$emit('user-emissions', res))
         },
         addDietData(evt){
             evt.preventDefault()
@@ -113,7 +113,7 @@ export default {
                 vegan: this.vegan
             }
             userData.portUserData(diet)
-            .then(res => eventBus.$emit('diet-emissions', res))
+            .then(res => eventBus.$emit('user-emissions', res))
         }
     },
 

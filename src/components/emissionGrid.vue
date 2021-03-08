@@ -14,8 +14,8 @@ export default {
   name:'emissions-grid',
     data () {
         return {
-          emissionData: []
-
+          emissionData: [],
+          factorsArray: []
         };
     },
   components: { 
@@ -26,7 +26,18 @@ export default {
       },
     mounted(){
       emissionsFactors.getEmissionFactor()
-        .then(emissionsFactors => this.data = emissionsFactors)
+        .then(emissionsFactors => this.factorsArray = emissionsFactors)
+
+      eventBus.$on("emission-factors", (data) => {
+          this.factorsArray.push(data)
+      })
+
+      userData.getUserData()
+        .then(result => this.emissionData = result)
+
+      eventBus.$on("user-emissions", (transport) => {
+            this.emissionData.push(transport)
+        })
     }
 
 }
