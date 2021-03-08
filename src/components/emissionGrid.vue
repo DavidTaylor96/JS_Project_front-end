@@ -1,6 +1,7 @@
 <template>
-  <article>
-      <emission-details v-for="(data, index) in emissionData" :key="index" :data="data"></emission-details>
+  <article v-if="factors">
+      <emission-details v-for="(data, index) in emissionData" :key="index" :data="data" :factor="factors"></emission-details>
+     
   </article>
 </template>
 
@@ -15,7 +16,7 @@ export default {
     data () {
         return {
           emissionData: [],
-          factorsArray: []
+          factors: null
         };
     },
   components: { 
@@ -26,17 +27,17 @@ export default {
       },
     mounted(){
       emissionsFactors.getEmissionFactor()
-        .then(emissionsFactors => this.factorsArray = emissionsFactors)
+        .then(emissionsFactors => this.factors = emissionsFactors[0])
 
       eventBus.$on("emission-factors", (data) => {
-          this.factorsArray.push(data)
+          this.factors = data
       })
 
       userData.getUserData()
         .then(result => this.emissionData = result)
 
-      eventBus.$on("user-emissions", (transport) => {
-            this.emissionData.push(transport)
+      eventBus.$on("user-emissions", (data) => {
+            this.emissionData.push(data)
         })
     }
 

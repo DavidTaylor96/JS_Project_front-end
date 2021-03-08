@@ -1,36 +1,35 @@
 <template>
-    <div>
-       <div class="data-wrap" v-if="data">
+    <article>
+       <div class="data-wrap" v-if="data" >
             <h2>Transport</h2>
-            <p>Your Input:{{data.car}}miles - Carbon Emissions: </p>
-            <p>{{data.train}}</p>
-            <p>{{data.bus}}</p>
-            <p>{{data.plane}}</p>
+            <p>Car: {{data.car ? `${data.car} miles`: "No Information" }} - Carbon Emissions: {{carTotal}} </p>
+            <p>Train: {{data.train ? `${data.train} miles`: "No Information"}}  - Carbon Emissions: {{trainTotal}}</p>
+            <p>Bus: {{data.bus ? `${data.bus} miles`: "No Information"}}  - Carbon Emissions: {{busTotal}}</p>
+            <p>Plane: {{data.plane ? `${data.plane} miles`: "No Information"}}  - Carbon Emissions: {{planeTotal}}</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Food</h2>
-            <p>{{data.highMeat}}</p>
-            <p>{{data.mediumMeat}}</p>
-            <p>{{data.lowMeat}}</p>
-            <p>{{data.pescatarian}}</p>
-            <p>{{data.vegetarian}}</p>
-            <p>{{data.vegan}}</p>
+            <p v-if="data.highMeat">High Meat - Carbon Emissions: {{data.highMeat}}</p>
+            <p v-if="data.lowMeat">Low Meat - Carbon Emissions: {{data.lowMeat}}</p>
+            <p v-if="data.mediumMeat">Medium Meat - Carbon Emissions: {{data.mediumMeat}}</p>
+            <p v-if="data.pescatarian">Pescatarian - Carbon Emissions: {{data.pescatarian}}</p>
+            <p v-if="data.vegetarian">Vegetarian - Carbon Emissions: {{data.vegetarian}}</p>
+            <p v-if="data.vegan">Vegan - Carbon Emissions: {{data.vegan}}</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Energy Usage</h2>
-            <p>{{data.gas}}</p>
-            <p>{{data.oil}}</p>
-            <p>{{data.electricity}}</p>
-        </div>
-
-        <button v-on:click="deleteUserData">Delete User Data</button>
-        <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
-
-        <button v-on:click="updateUserData">Update User Data</button>
-        <button type="button" class="update-button" v-on:click="updateUserData">Update User Data></button>
-    </div>
+            <p> Electricity Used: {{data.electricity ? `${data.electricity} kWh`: "No Information"}}  - Carbon Emissions: {{electricityTotal}}</p>
+            <p> Gas Used: {{data.gas ? `${data.gas} kWh`: "No Information"}}  - Carbon Emissions: {{gasTotal}}</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
+        </div>    
+    </article>
 </template>
 
 <script>
@@ -42,7 +41,7 @@ import emissionsFactors from '@/services/emissionsDataServices'
 
 export default {
     name: 'emission-details',
-    props: ['data'],    
+    props: ['data', 'factor'],    
     methods: {
         deleteUserData() {
             userData.deleteUserData(this.data._id)
@@ -53,13 +52,50 @@ export default {
             .then(() => eventBus.$emit('userData-updated', this.data._id))
         }
     },
-    // computed: {
-    //     carTotal(){
-    //         let total = this.data.car * 10
-    //         return total
-    //         console.log(total)
-    //     },
-    // },
+    computed: {
+        carTotal(){
+            let total = this.data.car * this.factor.transport.car
+            if (this.data.car){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        trainTotal(){
+            let total = this.data.train * this.factor.transport.train
+            if (this.data.train){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        busTotal(){
+            let total = this.data.bus * this.factor.transport.bus
+            if (this.data.bus){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        planeTotal(){
+            let total = this.data.plane * this.factor.transport.plane
+            if (this.data.plane){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+        electricityTotal(){
+            let total = this.data.electricity * this.factor.energy.electricity
+            if (this.data.electricity){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+         gasTotal(){
+            let total = this.data.gas * this.factor.energy.gas
+            if (this.data.gas){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+    },
     components: { 
       'emission-factors': emissionsFactors,
       'user-data': userData
