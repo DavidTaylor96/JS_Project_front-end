@@ -1,11 +1,11 @@
 <template>
     <article>
-       <div class="data-wrap" v-if="data">
+       <div class="data-wrap" v-if="data" >
             <h2>Transport</h2>
-            <p>Your Input: {{data.car}} miles - Carbon Emissions: </p>
-            <p>Your Input: {{data.train}} miles - Carbon Emissions:</p>
-            <p>Your Input: {{data.bus}} miles - Carbon Emissions:</p>
-            <p>Your Input: {{data.plane}} miles - Carbon Emissions:</p>
+            <p>Car: {{data.car ? `${data.car} miles`: "No Information" }} - Carbon Emissions: {{carTotal}} </p>
+            <p>Train: {{data.train}} miles - Carbon Emissions:</p>
+            <p>Bus: {{data.bus}} miles - Carbon Emissions:</p>
+            <p>Plane: {{data.plane}} miles - Carbon Emissions:</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
@@ -17,7 +17,7 @@
             <p>Diet Choice: {{data.lowMeat}} - Carbon Emissions:</p>
             <p>Diet Choice: {{data.pescatarian}} - Carbon Emissions:</p>
             <p>Diet Choice: {{data.vegetarian}} - Carbon Emissions:</p>
-            <p>Diet Choice: {{data.vegan}}</p>
+            <p>Diet Choice: {{data.vegan}} - Carbon Emissions:</p>
             <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
             <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
@@ -42,7 +42,7 @@ import emissionsFactors from '@/services/emissionsDataServices'
 
 export default {
     name: 'emission-details',
-    props: ['data'],    
+    props: ['data', 'factor'],    
     methods: {
         deleteUserData() {
             userData.deleteUserData(this.data._id)
@@ -53,13 +53,15 @@ export default {
             .then(() => eventBus.$emit('userData-updated', this.data._id))
         }
     },
-    // computed: {
-    //     carTotal(){
-    //         let total = this.data.car * 10
-    //         return total
-    //         console.log(total)
-    //     },
-    // },
+    computed: {
+        carTotal(){
+            let total = this.data.car * this.factor.transport.car
+            if (this.data.car){
+                return `${total}kg`}else{
+                    return "No Data Entered"
+                }
+        },
+    },
     components: { 
       'emission-factors': emissionsFactors,
       'user-data': userData
