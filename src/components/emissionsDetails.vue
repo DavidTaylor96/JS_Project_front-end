@@ -40,7 +40,7 @@ import emissionGrid from '@/components/emissionGrid.vue'
 
 export default {
     name: 'emission-details',
-    props: [],    
+    props: ['data'],    
     methods: {
         deleteUserData() {
             userData.deleteUserData(this.userData._id)
