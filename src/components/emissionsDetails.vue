@@ -1,36 +1,36 @@
 <template>
-    <div>
+    <article>
        <div class="data-wrap" v-if="data">
             <h2>Transport</h2>
-            <p>Your Input:{{data.car}}miles - Carbon Emissions: </p>
-            <p>{{data.train}}</p>
-            <p>{{data.bus}}</p>
-            <p>{{data.plane}}</p>
+            <p>Your Input: {{data.car}} miles - Carbon Emissions: </p>
+            <p>Your Input: {{data.train}} miles - Carbon Emissions:</p>
+            <p>Your Input: {{data.bus}} miles - Carbon Emissions:</p>
+            <p>Your Input: {{data.plane}} miles - Carbon Emissions:</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Food</h2>
-            <p>{{data.highMeat}}</p>
-            <p>{{data.mediumMeat}}</p>
-            <p>{{data.lowMeat}}</p>
-            <p>{{data.pescatarian}}</p>
-            <p>{{data.vegetarian}}</p>
-            <p>{{data.vegan}}</p>
+            <p>Diet Choice: {{data.highMeat}} - Carbon Emissions:</p>
+            <p>Diet Choice: {{data.mediumMeat}} - Carbon Emissions:</p>
+            <p>Diet Choice: {{data.lowMeat}} - Carbon Emissions:</p>
+            <p>Diet Choice: {{data.pescatarian}} - Carbon Emissions:</p>
+            <p>Diet Choice: {{data.vegetarian}} - Carbon Emissions:</p>
+            <p>Diet Choice: {{data.vegan}}</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
         </div>
 
         <div class="data-wrap" v-if="data">
             <h2>Energy Usage</h2>
-            <p>{{data.gas}}</p>
-            <p>{{data.oil}}</p>
-            <p>{{data.electricity}}</p>
-        </div>
-
-        <button v-on:click="deleteUserData">Delete User Data</button>
-        <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
-
-        <button v-on:click="updateUserData">Update User Data</button>
-        <button type="button" class="update-button" v-on:click="updateUserData">Update User Data></button>
-    </div>
+            <p> Energy Useage: {{data.gas}}kWh - Carbon Emissions:</p>
+            <p> Energy Useage: {{data.oil}}kWh - Carbon Emissions:</p>
+            <p> Energy Useage: {{data.electricity}}Litres - Carbon Emissions:</p>
+            <button type="button" class="delete-button" v-on:click="deleteUserData">Delete User Data</button>
+            <button type="button" class="update-button" v-on:click="updateUserData">Update User Data</button>
+        </div>    
+    </article>
 </template>
 
 <script>

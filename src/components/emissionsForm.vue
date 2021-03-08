@@ -112,7 +112,7 @@ export default {
                 vegetarian: this.vegetarian,
                 vegan: this.vegan
             }
-            userData.portUserData(diet)
+            userData.postUserData(diet)
             .then(res => eventBus.$emit('user-emissions', res))
         }
     },
