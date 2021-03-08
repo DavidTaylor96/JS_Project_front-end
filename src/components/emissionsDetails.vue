@@ -3,31 +3,31 @@
        <div class="data-wrap" v-if="data" >
             <h4 class="detail-text">Transport</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p v-if="data.car" class="display-data"><i id="icon" class="fa fa-car"></i> {{data.car}} miles <span class="total">{{carTotal.value = 0}}kg</span></p>
-            <p v-if="data.car" class="Co2">Co2</p>
-            <p v-if="data.train" class="display-data"><i id="icon" class="fa fa-subway"></i> {{data.train }} miles <span class="total">{{trainTotal.value = 0}}kg</span></p>
-            <p class="Co2" v-if="data.train">Co2</p>
-            <p v-if="data.bus" class="display-data"><i id="icon" class="fa fa-bus"></i> {{data.bus}} miles <span class="total">{{busTotal.value = 0}}kg</span></p>
-            <p class="Co2" v-if="data.bus">Co2</p>
-            <p v-if="data.plane" class="display-data"><i id="icon" class="fa fa-plane"></i> {{data.plane}} miles <span class="total">{{planeTota.value = 0}}kg</span></p>
-            <p class="Co2" v-if="data.plane">Co2</p>
+            <p v-if="data.car" class="display-data"><i id="icon" class="fa fa-car"></i> {{data.car}} miles <span class="total">{{carTotal}}kg</span></p>
+            <p v-if="data.car" class="emissions">Co2</p>
+            <p v-if="data.train" class="display-data"><i id="icon" class="fa fa-subway"></i> {{data.train }} miles <span class="total">{{trainTotal}}kg</span></p>
+            <p class="emissions" v-if="data.train">Co2</p>
+            <p v-if="data.bus" class="display-data"><i id="icon" class="fa fa-bus"></i> {{data.bus}} miles <span class="total">{{busTotal}}kg</span></p>
+            <p class="emissions" v-if="data.bus">Co2</p>
+            <p v-if="data.plane" class="display-data"><i id="icon" class="fa fa-plane"></i> {{data.plane}} miles <span class="total">{{planeTotal}}kg</span></p>
+            <p class="emissions" v-if="data.plane">Co2</p>
             <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit"></i>Update</button>
         </div>
         <div class="data-wrap" v-if="data">
             <h4 class="detail-text">Food</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
             <p v-if="data.highMeat" class="display-data"><i id="icon" class="fa fa-hamburger"></i> High Meat <span class="total">{{data.highMeat}}kg</span></p>
-            <p v-if="data.highMeat" class="Co2">Co2</p>
+            <p v-if="data.highMeat" class="emissions">Co2</p>
             <p v-if="data.lowMeat" class="display-data"><i id="icon" class="fa fa-bacon"></i> Low Meat <span class="total">{{data.lowMeat}}kg</span></p>
-            <p v-if="data.lowMeat" class="Co2">Co2</p>
+            <p v-if="data.lowMeat" class="emissions">Co2</p>
             <p v-if="data.mediumMeat" class="display-data"><i id="icon" class="fa fa-drumstick-bite"></i> Medium Meat <span class="total">{{data.mediumMeat}}kg</span></p>
-            <p v-if="data.mediumMeat" class="Co2">Co2</p>
+            <p v-if="data.mediumMeat" class="emissions">Co2</p>
             <p v-if="data.pescatarian" class="display-data"><i id="icon" class="fa fa-fish"></i> Pescatarian <span class="total">{{data.pescatarian}}kg</span></p>
-            <p v-if="data.pescatarian" class="Co2">Co2</p>
+            <p v-if="data.pescatarian" class="emissions">Co2</p>
             <p v-if="data.vegetarian" class="display-data">Vegetarian <span class="total">{{data.vegetarian}}kg</span></p>
-            <p v-if="data.vegetarian" class="Co2">Co2</p>
+            <p v-if="data.vegetarian" class="emissions">Co2</p>
             <p v-if="data.vegan" class="display-data"><i id="icon" class="fa fa-apple-alt"></i> Vegan <span class="total">{{data.vegan}}kg</span></p>
-            <p v-if="data.vegan" class="Co2">Co2</p>
+            <p v-if="data.vegan" class="emissions">Co2</p>
             <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button>
         </div>
 
@@ -35,9 +35,9 @@
             <h4 class="detail-text">Energy Usage</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
             <p v-if="data.electricity" class="display-data"><i id="icon" class="fa fa-bolt"></i> Electricity {{data.electricity}} kWh <span class="total">{{electricityTotal}}kg</span></p>
-            <p v-if="data.electricity" class="Co2">Co2</p>
+            <p v-if="data.electricity" class="emissions">Co2</p>
             <p v-if="data.gas" class="display-data"><i id="icon" class="fa fa-burn"></i> Gas {{data.gas}} kWh <span class="total">{{gasTotal}}kg</span></p>
-            <p v-if="data.gas" class="Co2">Co2</p>
+            <p v-if="data.gas" class="emissions">Co2</p>
             <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button>
         </div>    
     </article>
@@ -46,7 +46,6 @@
 <script>
 
 import{eventBus} from '@/main.js'
-import emissionGrid from '@/components/emissionGrid.vue'
 import userData from '@/services/userData'
 import emissionsFactors from '@/services/emissionsDataServices'
 
@@ -133,7 +132,8 @@ export default {
     border: none;
     background-color: #fff;
     padding: 7px;
-    margin-left: 20px;;
+    margin-left: 20px;
+    margin-top: 10px
 }
 
 .data-wrap{
@@ -143,8 +143,9 @@ export default {
     font-family: 'Montserrat', sans-serif;
     padding: 20px 0px;
     margin: 5px;
+    border-radius: 10px;
 }
-.Co2{
+.emissions{
     float: right;
     margin-right: 50px;
     font-weight: 900;
@@ -158,7 +159,6 @@ export default {
     margin-bottom: 0px;
     font-size: 14px;
 }
-
 .display-data{
     margin-left: 20px;
     margin-bottom: 0;
@@ -176,13 +176,16 @@ export default {
     background-color: gainsboro
 }
 
-@media(max-width: 600){
-.Co2{
+@media only screen and (max-width: 1200px){
+.emissions{
    font-weight: 900;
    font-size: 14px;
    margin-left: 260px;
    line-height: 0em;
    margin-top: 0;
  }
+ .wrapper{
+    box-shadow: 0 0 5px gainsboro;
+}
 }
 </style>

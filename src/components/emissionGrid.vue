@@ -26,6 +26,7 @@ export default {
 
       },
     mounted(){
+
       emissionsFactors.getEmissionFactor()
         .then(emissionsFactors => this.factors = emissionsFactors[0])
 
@@ -39,10 +40,11 @@ export default {
       eventBus.$on("user-emissions", (data) => {
             this.emissionData.push(data)
         })
-      // eventBus.$on('userData-deleted', (id) => {
-      //   let index = this.emissionData.findIndex(data => data._id === id)
-      //   this.emissionData.splice(index, 1)
-      // })
+
+      eventBus.$on('userData-deleted', (id) => {
+        let index = this.emissionData.findIndex(data => data._id === id)
+        this.emissionData.splice(index, 1)
+      })
     }
 
 }
