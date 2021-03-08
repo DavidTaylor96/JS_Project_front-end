@@ -26,6 +26,7 @@
 <script>
 import RadialProgressBar from 'vue-radial-progress'
 import emissionGrid from '@/components/emissionGrid.vue';
+import { eventBus } from '@/main.js'
 
 export default {
   data () {
