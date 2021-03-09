@@ -2,6 +2,7 @@
   <article v-if="factors">
       <emission-details v-for="(data, index) in emissionData" :key="index" :data="data" :factor="factors"></emission-details>
      
+     
   </article>
 </template>
 
@@ -10,6 +11,7 @@ import {eventBus} from '@/main.js'
 import emissionsDetails from './emissionsDetails.vue'
 import userData from '@/services/userData'
 import emissionsFactors from '@/services/emissionsDataServices'
+
 
 export default {
   name:'emissions-grid',
@@ -22,7 +24,8 @@ export default {
   components: { 
       'emission-details' : emissionsDetails ,
       'emission-factors': emissionsFactors,
-      'user-data': userData
+      'user-data': userData,
+      
 
       },
     mounted(){

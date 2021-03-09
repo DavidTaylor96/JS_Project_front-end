@@ -16,17 +16,17 @@
         <div class="data-wrap" v-if="data">
             <h4 class="detail-text">Food</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p v-if="data.highMeat" class="display-data"><i id="icon" class="fa fa-hamburger"></i> High Meat <span class="total">{{data.highMeat}}kg</span></p>
+            <p v-if="data.highMeat" class="display-data"><i id="icon" class="fa fa-hamburger"></i> High Meat <span class="total">{{factor.food.highMeat}}kg</span></p>
             <p v-if="data.highMeat" class="emissions">Co2</p>
-            <p v-if="data.lowMeat" class="display-data"><i id="icon" class="fa fa-bacon"></i> Low Meat <span class="total">{{data.lowMeat}}kg</span></p>
+            <p v-if="data.lowMeat" class="display-data"><i id="icon" class="fa fa-bacon"></i> Low Meat <span class="total">{{factor.food.lowMeat}}kg</span></p>
             <p v-if="data.lowMeat" class="emissions">Co2</p>
-            <p v-if="data.mediumMeat" class="display-data"><i id="icon" class="fa fa-drumstick-bite"></i> Medium Meat <span class="total">{{data.mediumMeat}}kg</span></p>
+            <p v-if="data.mediumMeat" class="display-data"><i id="icon" class="fa fa-drumstick-bite"></i> Medium Meat <span class="total">{{factor.food.mediumMeat}}kg</span></p>
             <p v-if="data.mediumMeat" class="emissions">Co2</p>
-            <p v-if="data.pescatarian" class="display-data"><i id="icon" class="fa fa-fish"></i> Pescatarian <span class="total">{{data.pescatarian}}kg</span></p>
+            <p v-if="data.pescatarian" class="display-data"><i id="icon" class="fa fa-fish"></i> Pescatarian <span class="total">{{factor.food.pescatarian}}kg</span></p>
             <p v-if="data.pescatarian" class="emissions">Co2</p>
-            <p v-if="data.vegetarian" class="display-data">Vegetarian <span class="total">{{data.vegetarian}}kg</span></p>
+            <p v-if="data.vegetarian" class="display-data">Vegetarian <span class="total">{{factor.food.vegetarian}}kg</span></p>
             <p v-if="data.vegetarian" class="emissions">Co2</p>
-            <p v-if="data.vegan" class="display-data"><i id="icon" class="fa fa-apple-alt"></i> Vegan <span class="total">{{data.vegan}}kg</span></p>
+            <p v-if="data.vegan" class="display-data"><i id="icon" class="fa fa-apple-alt"></i> Vegan <span class="total">{{factor.food.vegan}}kg</span></p>
             <p v-if="data.vegan" class="emissions">Co2</p>
             <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button>
         </div>

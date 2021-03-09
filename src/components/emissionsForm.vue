@@ -28,13 +28,13 @@
             <form class="diet" v-on:submit="addDietData" method="post">
                 <label for="diet-select"> Select a Diet Type:</label>
 
-                <select name="diet-select" id="diet-select" class="inputs-diet">
-                    <option value="highMeat" v-model="highMeat">High Meat</option>
-                    <option value="mediumMeat" v-model="mediumMeat">Medium Meat</option>
-                    <option value="lowMeat" v-model="lowMeat">Low Meat</option>
-                    <option value="pescatarian" v-model="pescatarian">Pescatarian</option>
-                    <option value="vegetarian" v-model="vegetarian">Vegetarian</option>
-                    <option value="vegan" v-model="vegan">Vegan</option>
+                <select name="diet-select" id="diet-select" class="inputs-diet" v-on:change="handleSelect(index)" v-model="selectedDiet">
+                    <option value="highMeat" >High Meat</option>
+                    <option value="mediumMeat" >Medium Meat</option>
+                    <option value="lowMeat" >Low Meat</option>
+                    <option :value="pescatarian" >Pescatarian</option>
+                    <option value="vegetarian" >Vegetarian</option>
+                    <option value="vegan" >Vegan</option>
                 </select>
           
                 <input type="submit" value="Submit Diet" class="diet-button" id="save" />
@@ -68,9 +68,12 @@
 <script>
 import {eventBus} from '@/main.js'
 import userData from '@/services/userData.js'
+import emissionGrid from '@/components/emissionGrid.vue'
+import emissionFactor from '@/services/emissionsDataServices'
 
 export default {
     name: 'emissions-form',
+    
 
     data(){
         return{
@@ -90,18 +93,17 @@ export default {
             },
 
             diet: {
-                mediumMeat: null,
-                lowMeat: null,
-                pescatarian: null,
-                vegetarian: null,
-                vegan: null,
-                highMeat: null,
+               selectedDiet: null,
                 status: false
             }
-
+            
         }
     },
 
+    component: {
+        'emissions-grid' : emissionGrid,
+    },
+   
     methods: {
         addTransportData(evt){
             evt.preventDefault()
@@ -167,8 +169,13 @@ export default {
         handleClickEnergy: function() {
             this.energy.status = true
         },
+        handleSelect: function() {
+        emissionFactor.getEmissionFactor(index)
+            .then(res => eventBus.$emit('diet-selected', this.factor, index, res))
+        },
+        
     },
-
+    
 }
 </script>
 
