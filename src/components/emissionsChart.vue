@@ -26,13 +26,15 @@
 <script>
 import RadialProgressBar from 'vue-radial-progress'
 import emissionGrid from '@/components/emissionGrid.vue';
-import { eventBus } from '@/main.js'
+import emissionsDetails from './emissionsDetails.vue'
+import userData from '@/services/userData'
+import emissionsFactors from '@/services/emissionsDataServices'
 
 export default {
   data () {
     return {
-      co2Emitted : 10,
-      maxCo2Produced: 22,
+      co2Emitted : getTotal,
+      maxCo2Produced: 654,
       startColor: "lightgreen",
       stopColor: "green",
       innerStrokeColor: "lightgray",
@@ -43,7 +45,7 @@ export default {
     }
   },
 
-  props: [],
+  props: ["data", "factors"],
 
   watch:{
    co2Emitted: function(){
@@ -65,11 +67,18 @@ export default {
     },
     totalPoints(){
       return this.animateSpeed /this.animationIncrements
-    }
+    },
+    getTotal(){
+        let total = (this.data.car * this.factor.transport.car) + (this.data.bus * this.factor.bus)
+        return `this is the grand total, ${total.toFixed(2)}` 
+        },
   },
   components: {
     RadialProgressBar,
     'emissions-grid' : emissionGrid,
+    'emission-details' : emissionsDetails ,
+    'emission-factors': emissionsFactors,
+    'user-data': userData
   }
 }
 </script>

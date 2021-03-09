@@ -66,28 +66,28 @@ export default {
         carTotal(){
             let total = this.data.car * this.factor.transport.car
             if (this.data.car){
-                return `${total}`}else{
+                return `${total.toFixed(2)}`}else{
                     return "No Data Entered"
                 }
         },
         trainTotal(){
             let total = this.data.train * this.factor.transport.train
             if (this.data.train){
-                return `${total}`}else{
+                return `${total.toFixed(2)}`}else{
                     return "No Data Entered"
                 }
         },
         busTotal(){
             let total = this.data.bus * this.factor.transport.bus
             if (this.data.bus){
-                return `${total}`}else{
+                return `${total.toFixed(2)}`}else{
                     return "No Data Entered"
                 }
         },
         planeTotal(){
             let total = this.data.plane * this.factor.transport.plane
             if (this.data.plane){
-                return `${total}`}else{
+                return `${total.toFixed(2)}`}else{
                     return "No Data Entered"
                 }
         },
