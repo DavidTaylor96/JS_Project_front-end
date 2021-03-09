@@ -28,13 +28,8 @@
             <form class="diet" v-on:submit="addDietData" method="post">
                 <label for="diet-select"> Select a Diet Type:</label>
 
-                <select name="diet-select" id="diet-select" class="inputs-diet" v-on:change="handleSelect(index)" v-model="selectedDiet">
-                    <option value="highMeat" >High Meat</option>
-                    <option value="mediumMeat" >Medium Meat</option>
-                    <option value="lowMeat" >Low Meat</option>
-                    <option :value="pescatarian" >Pescatarian</option>
-                    <option value="vegetarian" >Vegetarian</option>
-                    <option value="vegan" >Vegan</option>
+                <select name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
+                    <option v-for="(carbon,label,index) in diets" :key="index" :value="{[label]:carbon}"> {{label}} </option>
                 </select>
           
                 <input type="submit" value="Submit Diet" class="diet-button" id="save" />
@@ -77,6 +72,9 @@ export default {
 
     data(){
         return{
+            diets: [],
+            selectedDiet: null,
+
             transport: {
                 car: null,
                 train: null,
@@ -93,7 +91,7 @@ export default {
             },
 
             diet: {
-               selectedDiet: null,
+               
                 status: false
             }
             
@@ -140,23 +138,9 @@ export default {
         },
         addDietData(evt){
             evt.preventDefault()
-            const diet = {
-                highMeat: this.highMeat,
-                mediumMeat: this.mediumMeat,
-                lowMeat: this.lowMeat,
-                pescatarian: this.pescatarian,
-                vegetarian: this.vegetarian,
-                vegan: this.vegan
-            }
-            userData.postUserData(diet)
+            userData.postUserData(this.selectedDiet)
             .then(res => eventBus.$emit('user-emissions', res))
             this.diet = {
-                highMeat: null,             
-                mediumMeat: null,            
-                lowMeat: null,   
-                pescatarian: null,
-                vegetarian: null,  
-                vegan: null, 
                 status: false
             }
         },
@@ -173,6 +157,20 @@ export default {
         emissionFactor.getEmissionFactor(index)
             .then(res => eventBus.$emit('diet-selected', this.factor, index, res))
         },
+
+        getDietEmissionFactors() {
+            fetch("http://localhost:3000/api/emission/")
+            .then(res => res.json())
+            .then(data => {
+                this.diets = data[0].food
+            })
+        }
+
+
+        
+    },
+    mounted() {
+        this.getDietEmissionFactors();
         
     },
     
