@@ -1,11 +1,11 @@
 <template lang="html">
     <article>
 
-         <section class="transport-form base-form">
-            <button v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
-            <div v-if="transport.status">
+         <section>
+            <button class="button" v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
+            <div class="transport-form base-form" v-if="transport.status">
 
-            <p>Please enter the distance traveled in miles</p>
+            <p id="small-heading">Distance travelled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="car">Car</label>
                 <input type="number" id="car" class="inputs" v-model.number="transport.car"/>
@@ -16,43 +16,43 @@
                 <label for="plane">Plane</label>
                 <input type="number" id="plane" class="inputs" v-model.number="transport.plane"/> 
 
-                <input type="submit" value="Submit Transport" class="transport-button" id="save"/>     
+                <input type="submit" value="Submit Transport" class="transport-input-button" id="save"/>     
             </form>
             </div>
          </section>
 
-         <section class="diet-form base-form">
-            <button v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
-            <div v-if="diet.status">
+         <section>
+            <button class="button" v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
+            <div class="diet-form base-form" v-if="diet.status">
         
             <form class="diet" v-on:submit="addDietData" method="post">
-                <label for="diet-select"> Select a Diet Type:</label>
+                <label for="diet-select"> Select a Diet Type</label>
 
                 <select name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
                     <option v-for="(carbon,label,index) in diets" :key="index" :value="{[label]:carbon}"> {{label}} </option>
                 </select>
           
-                <input type="submit" value="Submit Diet" class="diet-button" id="save" />
+                <input type="submit" value="Submit Diet" class="diet-input-button" id="save" />
                 
             </form>
             </div>
          </section>
 
-         <section class="energy-form base-form">
-           <button v-if="!energy.status" v-on:click="handleClickEnergy()">Energy Usage</button>
-           <div v-if="energy.status">
+         <section>
+           <button class="button" v-if="!energy.status" v-on:click="handleClickEnergy()">Energy</button>
+           <div class="energy-form base-form" v-if="energy.status">
 
             <form class="energy" v-on:submit="addEnergyData" method="post">
-                <label for="electricity">Electricity:</label>
+                <label for="electricity">Electricity</label>
                 <input type="number" id="electricity"  class="inputs" v-model.number="electricity"/>
              
-                <label for="gas">Gas:</label>
+                <label for="gas">Gas</label>
                 <input type="number" id="gas" class="inputs" v-model.number="gas"/>
 
-                <label for="oil">Oil:</label>
+                <label for="oil">Oil</label>
                 <input type="number" id="oil" class="inputs" v-model.number="oil"/>
 
-                <input  type="submit" value="Submit Energy" class="energy-button" id="save" />
+                <input  type="submit" value="Submit Energy" class="energy-input-button" id="save" />
             </form>
             </div>
          </section>
@@ -177,46 +177,16 @@ export default {
 }
 </script>
 
-<style scope>
-
-.transport-holder{
-    background-color: #4CAF50;
-    border: none;
-    padding: 20px;
-    text-align: center;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    border-radius: 500px;
-}
-
-.diet-holder{
-    background-color: #4CAF50;
-    border: none;
-    padding: 20px;
-    text-align: center;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    border-radius: 500px;
-}
-
-.energy-holder{
-    background-color: #4CAF50;
-    border: none;
-    padding: 20px;
-    text-align: center;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    border-radius: 500px;
-}
+<style >
 
 .transport-form{
+    padding: 10px;
     margin: 2 auto;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    background-color: whitesmoke ;
+    border-radius: 10px;
 }
 .transport{
     display: flex;
@@ -235,41 +205,26 @@ export default {
 }
 
 .inputs{
-    border: 1px lightslategray inset;
+    border: 1px gainsboro solid;
     padding: 7px;
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
 .inputs-diet{
-    border: 1px lightslategray inset;
+    border: 1px gainsboro solid;
     padding: 7px 30px;
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
-#save{
-    margin: 7px auto;
-    background-color:#4CAF50;
-    border: 1px lightslategray solid;
-    border-radius: 5px;
-    color: #fff;
-}
-
-.transport-button{
-  padding: 7px 30px; 
-}
-
-.diet-button{
-    padding: 7px 45px;
-}
-
-.energy-button{
-    padding: 7px 35px;
-}
 
 .diet-form{
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
     font-size: 18px;
     text-align: center;
+    background-color: whitesmoke ;
+    box-shadow: 0 0 5px rgb(22, 98, 60);
+    border-radius: 10px;
+    margin: 10px auto;
        
 }
 .diet {
@@ -279,7 +234,10 @@ export default {
     align-items: center;
 }
 .energy-form{
+    padding: 15px;
     text-align: center;
+    background-color: whitesmoke ;
+    border-radius: 10px;
 }
 .energy{
     display: flex;
@@ -287,23 +245,49 @@ export default {
     align-items: center;
 }
 
-.info-button {
-    display: block;
-    border-color: yellowgreen;
-    border-width: thin;
-    border-radius: 25px;
-
-    align-items: center;
-    margin: auto;
-    height: 3vh;
-    width: 6vh;
+.energy-input-button{
+   margin: 5px 5px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   color: #fff;
+   padding: 10px 35px;
+   background-color: #246C5A;
 
 }
-.info-button:hover {
-    display: block;
-    background-color: yellowgreen;
+.transport-input-button{
+   margin: 5px 5px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   color: #fff;
+   padding: 10px 30px;
+   background-color: #246C5A;
+
+}
+
+.diet-input-button{
+   margin: 5px 5px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   color: #fff;
+   padding: 10px 45px;
+   background-color: #246C5A;
+
+}
+ .button{
+   font-size: 15px;
+   margin-top: 2px;
+   border: none;
+   border-radius: 7px;
+   color: #fff;
+   padding: 7px 10px;
+   background-color: #4CAF50;
  }
 
-
-
+ .button:hover{
+     background-color: #45a049;
+ }
+ #small-heading{
+     font-weight: bold;
+     color: black;
+ }
 </style>

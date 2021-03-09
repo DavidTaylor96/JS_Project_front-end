@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <h1 id="header">Try-Atomic</h1>
+    <h1 id="header">try-atomic</h1>
+    <p id="max-usage">Max Per Month 654kg</p>
      <emissions-chart id="chart"></emissions-chart>
     <emissions-form></emissions-form>
     <emissions-grid></emissions-grid>
@@ -26,10 +27,26 @@ export default {
 </script>
 
 <style>
-#header{
+body{
+  font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(#126563, #084f69);
+}
+#max-usage{
+  padding-bottom: 4px;
   text-align: center;
   font-weight: 100;
-}
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 1px black solid 
+  }
+
+#header{
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 3px;
+  }
 
 #chart{
   text-align: center;
