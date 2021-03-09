@@ -76,17 +76,17 @@ export default {
             selectedDiet: null,
 
             transport: {
-                car: null,
-                train: null,
-                bus: null,
-                plane: null,
+                car: 0,
+                train: 0,
+                bus: 0,
+                plane: 0,
                 status: false
                 },
 
             energy: {
-                electricity: null,
-                gas: null,
-                oil: null,
+                electricity: 0,
+                gas: 0,
+                oil: 0,
                 status: false
             },
 
@@ -114,10 +114,10 @@ export default {
             userData.postUserData(transport)
             .then(res => eventBus.$emit('user-emissions', res))
             this.transport = {
-                car: null,
-                train: null,
-                bus: null,
-                plane: null,
+                car: 0,
+                train: 0,
+                bus: 0,
+                plane: 0,
                 status: false
                 }
         },
@@ -131,8 +131,8 @@ export default {
             userData.postUserData(energy)
             .then(res => eventBus.$emit('user-emissions', res))
             this.energy = {
-                electricity: null,
-                gas: null,
+                electricity: 0,
+                gas: 0,
                 status: false
             }
         },
