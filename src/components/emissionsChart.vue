@@ -33,7 +33,6 @@ import emissionsFactors from '@/services/emissionsDataServices'
 export default {
   data () {
     return {
-      co2Emitted : getTotal,
       maxCo2Produced: 654,
       startColor: "lightgreen",
       stopColor: "green",
@@ -45,8 +44,15 @@ export default {
     }
   },
 
-  props: ["data", "factors"],
+  props: ['data', 'factor'],
 
+  mounted() {
+     emissionsFactors.getEmissionFactor()
+        .then(emissionsFactors => this.factors = emissionsFactors[0])
+
+    userData.getUserData()
+      .then(userData => this.data = userData[0])
+  },
   watch:{
    co2Emitted: function(){
      if (this.co2Emitted > 20){
@@ -68,9 +74,12 @@ export default {
     totalPoints(){
       return this.animateSpeed /this.animationIncrements
     },
-    getTotal(){
-        let total = (this.data.car * this.factor.transport.car) + (this.data.bus * this.factor.bus)
-        return `this is the grand total, ${total.toFixed(2)}` 
+    co2Emitted(){
+        let total = 0
+         if (this.data && this.factor){
+          total = (this.data.car * this.factor.transport.car) + (this.data.bus * this.factor.bus) + (this.data.train * this.factor.train)
+         }
+        return Number(total.toFixed(2)) 
         },
   },
   components: {
