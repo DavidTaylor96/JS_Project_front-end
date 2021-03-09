@@ -1,26 +1,30 @@
 <template lang="html">
     <article>
-        <section class="transport-form base-form">
-            <h2>Transport</h2>
-            <button class="info-button"><span>Index</span></button>
+
+         <section class="transport-form base-form">
+            <button v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
+            <div v-if="transport.status">
+
             <p>Please enter the distance traveled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="car">Car</label>
-                <input type="number" id="car" class="inputs" v-model.number="car"/>
+                <input type="number" id="car" class="inputs" v-model.number="transport.car"/>
                 <label for="train">Train</label>
-                <input type="number" id="train" class="inputs" v-model.number="train"/>
+                <input type="number" id="train" class="inputs" v-model.number="transport.train"/>
                 <label for="bus">Bus</label>
-                <input type="number" id="bus" class="inputs" v-model.number="bus"/>
+                <input type="number" id="bus" class="inputs" v-model.number="transport.bus"/>
                 <label for="plane">Plane</label>
-                <input type="number" id="plane" class="inputs" v-model.number="plane"/> 
+                <input type="number" id="plane" class="inputs" v-model.number="transport.plane"/> 
 
-                <input type="submit" value="Submit Transport" class="transport-button" id="save" />     
+                <input type="submit" value="Submit Transport" class="transport-button" id="save"/>     
             </form>
-        </section>
+            </div>
+         </section>
 
-        <section class="diet-form base-form">
-            <h2>Diet</h2>
-            
+         <section class="diet-form base-form">
+            <button v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
+            <div v-if="diet.status">
+        
             <form class="diet" v-on:submit="addDietData" method="post">
                 <label for="diet-select"> Select a Diet Type:</label>
 
@@ -32,14 +36,17 @@
                     <option value="vegetarian" v-model="vegetarian">Vegetarian</option>
                     <option value="vegan" v-model="vegan">Vegan</option>
                 </select>
-                
+          
                 <input type="submit" value="Submit Diet" class="diet-button" id="save" />
                 
             </form>
-        </section>
+            </div>
+         </section>
 
-        <section class="energy-form base-form">
-           <h2>Energy Usage</h2>
+         <section class="energy-form base-form">
+           <button v-if="!energy.status" v-on:click="handleClickEnergy()">Energy Usage</button>
+           <div v-if="energy.status">
+
             <form class="energy" v-on:submit="addEnergyData" method="post">
                 <label for="electricity">Electricity:</label>
                 <input type="number" id="electricity"  class="inputs" v-model.number="electricity"/>
@@ -52,10 +59,10 @@
 
                 <input  type="submit" value="Submit Energy" class="energy-button" id="save" />
             </form>
-        </section>
+            </div>
+         </section>
 
     </article>
-  
 </template>
 
 <script>
@@ -67,19 +74,31 @@ export default {
 
     data(){
         return{
-            car: null,
-            train: null,
-            bus: null,
-            plane: null,
-            electricity: null,
-            gas: null,
-            oil: null,
-            highMeat: null,
-            mediumMeat: null,
-            lowMeat: null,
-            pescatarian: null,
-            vegetarian: null,
-            vegan: null
+            transport: {
+                car: null,
+                train: null,
+                bus: null,
+                plane: null,
+                status: false
+                },
+
+            energy: {
+                electricity: null,
+                gas: null,
+                oil: null,
+                status: false
+            },
+
+            diet: {
+                mediumMeat: null,
+                lowMeat: null,
+                pescatarian: null,
+                vegetarian: null,
+                vegan: null,
+                highMeat: null,
+                status: false
+            }
+
         }
     },
 
@@ -87,13 +106,20 @@ export default {
         addTransportData(evt){
             evt.preventDefault()
             const transport = {
-                car: this.car,
-                train: this.train,
-                bus: this.bus,
-                plane: this.plane
+                car: this.transport.car,
+                train: this.transport.train,
+                bus: this.transport.bus,
+                plane: this.transport.plane
             }
             userData.postUserData(transport)
             .then(res => eventBus.$emit('user-emissions', res))
+            this.transport = {
+                car: null,
+                train: null,
+                bus: null,
+                plane: null,
+                status: false
+                }
         },
         addEnergyData(evt){
             evt.preventDefault()
@@ -117,6 +143,18 @@ export default {
             }
             userData.postUserData(diet)
             .then(res => eventBus.$emit('user-emissions', res))
+        },
+        handleClickTransport: function(index) {
+            this.transport.status = true
+        },
+        handleClickDiet: function() {
+            this.diet.status = true
+        },
+        handleClickEnergy: function() {
+            this.energy.status = true
+        },
+        handleSubmittedTransport: function() {
+            this.transport = false
         }
     },
 
@@ -124,6 +162,40 @@ export default {
 </script>
 
 <style scope>
+
+.transport-holder{
+    background-color: #4CAF50;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    border-radius: 500px;
+}
+
+.diet-holder{
+    background-color: #4CAF50;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    border-radius: 500px;
+}
+
+.energy-holder{
+    background-color: #4CAF50;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    border-radius: 500px;
+}
+
 .transport-form{
     margin: 2 auto;
     display: flex;
