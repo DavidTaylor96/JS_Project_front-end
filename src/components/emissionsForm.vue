@@ -130,6 +130,11 @@ export default {
             }
             userData.postUserData(energy)
             .then(res => eventBus.$emit('user-emissions', res))
+            this.energy = {
+                electricity: null,
+                gas: null,
+                status: false
+            }
         },
         addDietData(evt){
             evt.preventDefault()
@@ -143,6 +148,15 @@ export default {
             }
             userData.postUserData(diet)
             .then(res => eventBus.$emit('user-emissions', res))
+            this.diet = {
+                highMeat: null,             
+                mediumMeat: null,            
+                lowMeat: null,   
+                pescatarian: null,
+                vegetarian: null,  
+                vegan: null, 
+                status: false
+            }
         },
         handleClickTransport: function(index) {
             this.transport.status = true
@@ -153,9 +167,6 @@ export default {
         handleClickEnergy: function() {
             this.energy.status = true
         },
-        handleSubmittedTransport: function() {
-            this.transport = false
-        }
     },
 
 }
