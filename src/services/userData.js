@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3000/api/userData"
+const baseURL = "http://localhost:3000/api/userData/"
 
 export default{
   getUserData(){

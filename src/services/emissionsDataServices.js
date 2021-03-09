@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3000/api/emission"
+const baseURL = "http://localhost:3000/api/emission/"
 
 export default{
     getEmissionFactor(){
