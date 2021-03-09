@@ -1,8 +1,7 @@
 <template lang="html">
     <article>
-
+        <button class="button" v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
          <section>
-            <button class="button" v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
             <div class="transport-form base-form" v-if="transport.status">
 
             <p id="small-heading">Distance travelled in miles</p>
@@ -21,12 +20,12 @@
             </div>
          </section>
 
+           <button class="button" v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
          <section>
-            <button class="button" v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
             <div class="diet-form base-form" v-if="diet.status">
         
             <form class="diet" v-on:submit="addDietData" method="post">
-                <label for="diet-select"> Select a Diet Type</label>
+                <label for="diet-select" id="small-heading"> Select a Diet Type</label>
 
                 <select name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
                     <option v-for="(carbon,label,index) in diets" :key="index" :value="{[label]:carbon}"> {{label}} </option>
@@ -37,11 +36,10 @@
             </form>
             </div>
          </section>
-
-         <section>
            <button class="button" v-if="!energy.status" v-on:click="handleClickEnergy()">Energy</button>
+         <section>
            <div class="energy-form base-form" v-if="energy.status">
-
+                <p id="small-heading">Enter amount of energy used</p>
             <form class="energy" v-on:submit="addEnergyData" method="post">
                 <label for="electricity">Electricity</label>
                 <input type="number" id="electricity"  class="inputs" v-model.number="electricity"/>
@@ -177,11 +175,11 @@ export default {
 }
 </script>
 
-<style >
+<style scope>
 
 .transport-form{
     padding: 10px;
-    margin: 2 auto;
+    margin: 20 auto;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -224,7 +222,7 @@ export default {
     background-color: whitesmoke ;
     box-shadow: 0 0 5px rgb(22, 98, 60);
     border-radius: 10px;
-    margin: 10px auto;
+    margin: 20px auto;
        
 }
 .diet {
@@ -280,14 +278,15 @@ export default {
    border-radius: 7px;
    color: #fff;
    padding: 7px 10px;
-   background-color: #4CAF50;
+   background-color: #319e2f;
  }
 
  .button:hover{
-     background-color: #45a049;
+     background-color: #288632;
  }
  #small-heading{
      font-weight: bold;
      color: black;
+     font-family: sans-serif;
  }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="progress-bar">
     <radial-progress-bar
-        :diameter="170"
+        :diameter="190"
         :completedSteps="co2Emitted"
         :totalSteps="maxCo2Produced"
         :startColor="startColor"
@@ -10,14 +10,14 @@
         :animateSpeed="animateSpeed"
         :timingFunc="timingFunc"
         :fps="fps"
-        :isClockwise="isClockwise">
+        :isClockwise="isClockwise"
+        :strokeLinecap="strokeLinecap">
     <div class="inner-text">
-      <h3>{{ maxCo2Produced }}kg</h3>
-      <p id="inner-texts">Max per day</p>
     </div>
     <div class="co2-emitted">
-      <h3>{{ co2Emitted }}kg</h3>
-      <p id="inner-texts">Co2 Emitted</p>
+      <p id="co2-inner-text">Co2</p>
+      <h3 id="co2-heading">{{ co2Emitted }}kg</h3>
+      <p id="inner-texts">So far this month</p>
     </div>
     </radial-progress-bar>
   </div>
@@ -34,11 +34,12 @@ export default {
   data () {
     return {
       maxCo2Produced: 654,
-      startColor: "lightgreen",
-      stopColor: "green",
+      startColor: "green",
+      stopColor: "lightgreen",
       innerStrokeColor: "lightgray",
       animateSpeed: 2000,
       timingFunc: "linear",
+      strokeLinecap: "round",
       fps: 60,
       isClockwise: true,
       data: [],
@@ -51,6 +52,7 @@ export default {
   mounted() {
      emissionsFactors.getEmissionFactor()
         .then(emissionsFactors => this.factors = emissionsFactors[0])
+        
 
     userData.getUserData()
       .then(userData => this.data = userData)
@@ -59,8 +61,6 @@ export default {
    co2Emitted: function(){
      if (this.co2Emitted > 600){
        this.startColor = "red"
-     }else{
-       this.startColor = "lightgreen"
      }
    },
    maxCo2Produced: function(){
@@ -95,7 +95,7 @@ export default {
           }, 0)
         }, 0)
       }
-      return Number(total.toFixed(2)) 
+      return Number(total.toFixed(0)) 
     },
   },
   components: {
@@ -114,12 +114,21 @@ export default {
   justify-content: center;
   font-size: 14px;
 }
-.inner-text{
+#inner-texts{
   padding: 0px;
   line-height: 0.1em;
+  color: #42D23F;
 }
 
 .co2-emitted{
   line-height: 0.1em;
+}
+
+#co2-heading{
+  color: white;
+  font-size: 25px;
+}
+#co2-inner-text{
+  color: #42D23F
 }
 </style>

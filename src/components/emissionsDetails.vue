@@ -4,41 +4,41 @@
             <h4 class="detail-text">Transport</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
             <p v-if="data.car" class="display-data"><i id="icon" class="fa fa-car"></i> {{data.car}} miles <span class="total">{{carTotal}}kg</span></p>
-            <p v-if="data.car" class="emissions">Co2</p>
+            <p v-if="data.car" class="emission">Co2</p>
             <p v-if="data.train" class="display-data"><i id="icon" class="fa fa-subway"></i> {{data.train }} miles <span class="total">{{trainTotal}}kg</span></p>
-            <p class="emissions" v-if="data.train">Co2</p>
+            <p class="emission" v-if="data.train">Co2</p>
             <p v-if="data.bus" class="display-data"><i id="icon" class="fa fa-bus"></i> {{data.bus}} miles <span class="total">{{busTotal}}kg</span></p>
-            <p class="emissions" v-if="data.bus">Co2</p>
+            <p class="emission" v-if="data.bus">Co2</p>
             <p v-if="data.plane" class="display-data"><i id="icon" class="fa fa-plane"></i> {{data.plane}} miles <span class="total">{{planeTotal}}kg</span></p>
-            <p class="emissions" v-if="data.plane">Co2</p>
-            <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit"></i>Update</button>
+            <p class="emission" v-if="data.plane">Co2</p>
+            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit"></i>Update</button> -->
         </div>
         <div class="data-wrap" v-if="data">
             <h4 class="detail-text">Food</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
             <p v-if="data.highMeat" class="display-data"><i id="icon" class="fa fa-hamburger"></i> High Meat <span class="total">{{factor.food.highMeat}}kg</span></p>
-            <p v-if="data.highMeat" class="emissions">Co2</p>
+            <p v-if="data.highMeat" class="emission">Co2</p>
             <p v-if="data.lowMeat" class="display-data"><i id="icon" class="fa fa-bacon"></i> Low Meat <span class="total">{{factor.food.lowMeat}}kg</span></p>
-            <p v-if="data.lowMeat" class="emissions">Co2</p>
+            <p v-if="data.lowMeat" class="emission">Co2</p>
             <p v-if="data.mediumMeat" class="display-data"><i id="icon" class="fa fa-drumstick-bite"></i> Medium Meat <span class="total">{{factor.food.mediumMeat}}kg</span></p>
-            <p v-if="data.mediumMeat" class="emissions">Co2</p>
+            <p v-if="data.mediumMeat" class="emission">Co2</p>
             <p v-if="data.pescatarian" class="display-data"><i id="icon" class="fa fa-fish"></i> Pescatarian <span class="total">{{factor.food.pescatarian}}kg</span></p>
-            <p v-if="data.pescatarian" class="emissions">Co2</p>
+            <p v-if="data.pescatarian" class="emission">Co2</p>
             <p v-if="data.vegetarian" class="display-data">Vegetarian <span class="total">{{factor.food.vegetarian}}kg</span></p>
-            <p v-if="data.vegetarian" class="emissions">Co2</p>
+            <p v-if="data.vegetarian" class="emission">Co2</p>
             <p v-if="data.vegan" class="display-data"><i id="icon" class="fa fa-apple-alt"></i> Vegan <span class="total">{{factor.food.vegan}}kg</span></p>
-            <p v-if="data.vegan" class="emissions">Co2</p>
-            <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button>
+            <p v-if="data.vegan" class="emission">Co2</p>
+            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button> -->
         </div>
 
         <div class="data-wrap" v-if="data">
             <h4 class="detail-text">Energy Usage</h4>
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
             <p v-if="data.electricity" class="display-data"><i id="icon" class="fa fa-bolt"></i> Electricity {{data.electricity}} kWh <span class="total">{{electricityTotal}}kg</span></p>
-            <p v-if="data.electricity" class="emissions">Co2</p>
+            <p v-if="data.electricity" class="emission">Co2</p>
             <p v-if="data.gas" class="display-data"><i id="icon" class="fa fa-burn"></i> Gas {{data.gas}} kWh <span class="total">{{gasTotal}}kg</span></p>
-            <p v-if="data.gas" class="emissions">Co2</p>
-            <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button>
+            <p v-if="data.gas" class="emission">Co2</p>
+            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button> -->
         </div>    
     </article>
 </template>
@@ -118,7 +118,7 @@ export default {
 .delete-button {
     display: flex;
     float: right;
-    background-color: #fff;
+    background-color: whitesmoke;
     border: none;
     margin-right: 5px;
     margin-top: 20px;
@@ -127,46 +127,55 @@ export default {
     color: red;
 }
 
-.update-button {
+/* .update-button {
     text-align: center;
     border: none;
-    background-color: #fff;
+    background-color: whitesmoke;
     padding: 7px;
     margin-left: 20px;
     margin-top: 10px
-}
+} */
 
 .data-wrap{
-    border-bottom: 1px gainsboro solid
+    border-bottom: 1px gainsboro solid;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: whitesmoke;
 }
 .wrapper{
     font-family: 'Montserrat', sans-serif;
-    padding: 20px 0px;
-    margin: 5px;
-    border-radius: 10px;
+    padding: 0px 1px;
+    margin: 0px;
+
 }
 .emissions{
     float: right;
     margin-right: 50px;
-    font-weight: 900;
     font-size: 14px;
-    line-height: 0em;
+}
+.emission{
+    margin-left: 93%;
     margin-top: 0;
+    color:  #236422;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 0em;
 }
 .total{
     float: right;
     margin-right: 50px;
-    margin-bottom: 0px;
     font-size: 14px;
+    margin-bottom: 0;
 }
 .display-data{
     margin-left: 20px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
 }
 
 .detail-text{
     display: inline-block;
     margin-left: 10px;
+    margin-bottom: 0px;
 }
 
 #icon{
@@ -176,16 +185,30 @@ export default {
     background-color: gainsboro
 }
 
-@media only screen and (max-width: 1200px){
-.emissions{
+@media only screen and (max-width: 1000px){
+/* .emissions{
    font-weight: 900;
    font-size: 14px;
    margin-left: 260px;
-   line-height: 0em;
-   margin-top: 0;
- }
- .wrapper{
-    box-shadow: 0 0 5px gainsboro;
+ } */
+ .emission{
+    margin-left: 83%;
+    margin-top: 0;
+    color:  #236422;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 0em;
+}
+}
+
+@media only screen and (max-width: 500px){
+ .emission{
+    margin-left: 244px;
+    margin-top: 0;
+    color:  #236422;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 0em;
 }
 }
 </style>

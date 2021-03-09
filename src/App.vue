@@ -29,7 +29,7 @@ export default {
 <style>
 body{
   font-family: 'Montserrat', sans-serif;
-  background-image: linear-gradient(#126563, #084f69);
+  background-image: linear-gradient(#126563, #084f69, #084f69);
 }
 #max-usage{
   padding-bottom: 4px;
@@ -38,14 +38,17 @@ body{
   color: #fff;
   margin-top: 0;
   margin-bottom: 30px;
-  border-bottom: 1px black solid 
+  padding: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px slategrey solid 
   }
 
 #header{
   text-align: center;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 3px;
+  margin-top: 5px;
+  margin-bottom: 0px;
   }
 
 #chart{
