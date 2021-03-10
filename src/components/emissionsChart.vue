@@ -91,7 +91,7 @@ export default {
     co2Emitted(){
       return Number(this.data.reduce((total, emission) => {
         return total + (this.factorTypes[emission.label] * emission.quantity)
-      },0).toFixed(2))
+      },0).toFixed(0))
     },
   },
   components: {
