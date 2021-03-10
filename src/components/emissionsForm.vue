@@ -13,11 +13,12 @@
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="transport-type">Transport Type:</label>
                 <select id="transport-dropDown" required v-model="transport.type">
+                    <option value="" disabled selected >Select transport type</option>
                     <option v-for="(carbon, label, index) in transportTypes" :key="index" :value="label">{{label}}</option>
                 </select>
 
                 <label for="transport-quantity">Quantity (miles):</label>
-                <input type="number" required id="transport-quantity" class="inputs" v-model.number="transport.quantity"/> 
+                <input type="number" required id="transport-quantity-input" class="inputs" v-model.number="transport.quantity"/> 
 
                 <input type="submit" value="Submit Transport" class="transport-input-button" id="save"/>     
             </form>
@@ -31,6 +32,7 @@
                 <label for="diet-select" id="small-heading"> Select a Diet Type</label>
 
                 <select required name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
+                    <option value="" disabled selected >Select diet type</option>
                     <option v-for="(carbon,label,index) in diets" :key="index" :value="label"> {{label}} </option>
                 </select>
           
@@ -45,11 +47,12 @@
                 <p id="small-heading">Enter amount of energy used</p>
                 <form class="energy" v-on:submit="addEnergyData" method="post">
                    <label for="energy-type">Energy</label>
-                   <select  id="energy-type"required v-model="energy.type">
+                   <select  id="energy-type-dropDown"required v-model="energy.type">
+                       <option value="" disabled selected >Select energy type</option>
                      <option v-for="(carbon, label, index) in energyTypes" :key="index" :value="label">{{label}}</option> 
                    </select>
                    <label for="enrgy-quantity">Quantity (kWh):</label>
-                   <input type="number" required id="energy-quantity" class="inputs" v-model.number="energy.quantity"/> 
+                   <input type="number" required id="energy-quantity-input" class="inputs" v-model.number="energy.quantity"/> 
                    <input  type="submit" value="Submit Energy" class="energy-input-button" id="save" />
                 </form>
             </div>
@@ -183,7 +186,7 @@ export default {
 
 .transport-form{
     padding: 10px;
-    margin: 20 auto;
+    margin: 10px 7px;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -196,13 +199,10 @@ export default {
     align-items: center;
     
 }
-
 .transport-form > p {
-    box-sizing: border-box;
     margin-bottom: 7px;
 }
 .transport-form > h2 {
-    box-sizing: border-box;
     margin:0;
 }
 
@@ -212,41 +212,53 @@ export default {
 }
 #transport-dropDown{
     border: 1px gainsboro solid;
-    padding: 7px 60px;
+    padding: 7px 17px;
+    border-radius: 7px;
+}
+#transport-quantity-input{
+    border: 1px gainsboro solid;
+    padding: 7px 15px;
     border-radius: 7px;
 }
 
-
-.inputs{
+#diet-select{
     border: 1px gainsboro solid;
-    padding: 7px 50px;
-    border-radius: 7px;
-}
-
-.inputs-diet{
-    border: 1px gainsboro solid;
-    padding: 7px;
+    padding: 7px 25px;
     border-radius: 7px;
 }
 
 
 .diet-form{
+    margin: 10px 7px;
     padding: 20px;
     font-size: 18px;
     text-align: center;
     background-color: whitesmoke ;
-    box-shadow: 0 0 5px rgb(22, 98, 60);
     border-radius: 10px;
-    margin: 20px auto;
        
 }
 .diet {
-    margin: 2 auto;
+    margin: 6px 6px;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
 }
+
+#energy-type-dropDown{
+    border: 1px gainsboro solid;
+    padding: 7px 20px;
+    border-radius: 7px;
+}
+
+
+#energy-quantity-input{
+    border: 1px gainsboro solid;
+    padding: 7px 12px;
+    border-radius: 7px;
+}
+
 .energy-form{
+    margin: 10px 7px;
     padding: 15px;
     text-align: center;
     background-color: whitesmoke ;
@@ -282,7 +294,7 @@ export default {
    border: 1px solid #ccc;
    border-radius: 8px;
    color: #fff;
-   padding: 10px 45px;
+   padding: 10px 40px;
    background-color: #246C5A;
 
 }
@@ -308,8 +320,9 @@ export default {
      justify-content: space-around;
  }
  #small-heading{
-     font-weight: bold;
-     color: black;
-     font-family: sans-serif;
+     font-weight: 400;
+     font-size: 20px;
+     color: #17491c;
+     font-family:  Times, 'Times New Roman', serif;
  }
 </style>

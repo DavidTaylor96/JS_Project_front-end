@@ -97,7 +97,7 @@ export default {
 }
 .total{
     float: right;
-    margin-right: 50px;
+    margin-right: 13px;
     font-size: 14px;
     margin-bottom: 0;
 }
@@ -113,7 +113,7 @@ export default {
 }
 
 #icon{
-    border: 1px gray solid;
+    border: 1px #236422 solid;
     padding: 5px;
     border-radius: 5px;
     background-color: gainsboro
