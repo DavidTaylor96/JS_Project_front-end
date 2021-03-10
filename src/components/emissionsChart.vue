@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-bar">
+  <div class="progress-bar" v-on:change.self="reload">
     <radial-progress-bar
         :diameter="190"
         :completedSteps="co2Emitted"
@@ -12,8 +12,6 @@
         :fps="fps"
         :isClockwise="isClockwise"
         :strokeLinecap="strokeLinecap">
-    <div class="inner-text">
-    </div>
     <div class="co2-emitted">
       <p id="co2-inner-text">Co2</p>
       <h3 id="co2-heading">{{ co2Emitted }}kg</h3>
@@ -47,16 +45,16 @@ export default {
     }
   },
 
-  props: [],
 
   mounted() {
-     emissionsFactors.getEmissionFactor()
+    emissionsFactors.getEmissionFactor()
         .then(emissionsFactors => this.factors = emissionsFactors[0])
         
-
     userData.getUserData()
       .then(userData => this.data = userData)
+
   },
+
   watch:{
    co2Emitted: function(){
      if (this.co2Emitted > 600){
@@ -67,6 +65,12 @@ export default {
     if (this.co2Emitted === this.maxCo2Produced){
       this.innerStrokeColor = "red"
     }
+   },
+   '$route': 'fetchData'
+  },
+   methods:{
+   appForceUpdate(){
+     this.$forceUpdate()
    }
   },
   computed:{

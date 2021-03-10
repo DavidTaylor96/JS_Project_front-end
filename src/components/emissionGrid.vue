@@ -59,7 +59,6 @@ export default {
         this.emissionData.splice(index, 1)
       })
     }
-
 }
 </script>
 

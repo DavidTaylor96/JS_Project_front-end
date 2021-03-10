@@ -22,7 +22,7 @@ export default {
     'emissions-grid' : emissionGrid,
     'emissions-chart': emissionsChart
   
-  }
+  },
 }
 </script>
 

@@ -2,7 +2,7 @@
     <article class="wrapper">
         <div class="data-wrap">
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p class="display-data"><i id="icon" :class="['fa', typeIcon]"></i> {{data.label}} x {{data.quantity}} {{data.unit}} <span class="total">{{emissionTotal}}kg</span></p>
+            <p class="display-data"><i id="icon" :class="['fa', typeIcon]"></i> {{data.label}} {{data.quantity}} {{data.unit}} <span class="total">{{emissionTotal}}kg</span></p>
             <p class="emission">Co2</p>
         </div>
     </article>
@@ -68,15 +68,6 @@ export default {
 .delete-button:hover{
     color: red;
 }
-
-/* .update-button {
-    text-align: center;
-    border: none;
-    background-color: whitesmoke;
-    padding: 7px;
-    margin-left: 20px;
-    margin-top: 10px
-} */
 
 .data-wrap{
     border-bottom: 1px gainsboro solid;

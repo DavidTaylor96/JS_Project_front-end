@@ -12,7 +12,7 @@
             <p id="small-heading">Distance travelled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
                 <label for="transport-type">Transport Type:</label>
-                <select id="transport-type" required v-model="transport.type">
+                <select id="transport-dropDown" required v-model="transport.type">
                     <option v-for="(carbon, label, index) in transportTypes" :key="index" :value="label">{{label}}</option>
                 </select>
 
@@ -207,8 +207,12 @@ export default {
 }
 
 #transport-type{
-    border: 1px gainsboro solid;
     padding: 7px;
+    border-radius: 7px;
+}
+#transport-dropDown{
+    border: 1px gainsboro solid;
+    padding: 7px 60px;
     border-radius: 7px;
 }
 
