@@ -85,17 +85,9 @@ export default {
       }, {})
     },
     co2Emitted(){
-      let total = 0
-      if (this.data && this.factorTypes){
-        total = this.data.reduce((acc, emissionObject) => {
-          delete emissionObject._id
-
-          return acc + Object.entries(emissionObject).reduce((acc2, [emissionType, emissionValue]) => {
-            return acc2 + (this.factorTypes[emissionType] * emissionValue)
-          }, 0)
-        }, 0)
-      }
-      return Number(total.toFixed(0)) 
+      return Number(this.data.reduce((total, emission) => {
+        return total + (this.factorTypes[emission.label] * emission.quantity)
+      },0).toFixed(2))
     },
   },
   components: {

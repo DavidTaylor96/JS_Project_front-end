@@ -1,34 +1,37 @@
 <template lang="html">
     <article>
-        <button class="button" v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
+        <section id="button-container"> 
+            <button class="button" v-if="!transport.status" v-on:click="handleClickTransport">Transport</button>
+            <button class="button" v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
+            <button class="button" v-if="!energy.status" v-on:click="handleClickEnergy()">Energy</button> 
+        </section>
+
          <section>
             <div class="transport-form base-form" v-if="transport.status">
 
             <p id="small-heading">Distance travelled in miles</p>
             <form class="transport" v-on:submit="addTransportData" method="post">
-                <label for="car">Car</label>
-                <input type="number" id="car" class="inputs" v-model.number="transport.car"/>
-                <label for="train">Train</label>
-                <input type="number" id="train" class="inputs" v-model.number="transport.train"/>
-                <label for="bus">Bus</label>
-                <input type="number" id="bus" class="inputs" v-model.number="transport.bus"/>
-                <label for="plane">Plane</label>
-                <input type="number" id="plane" class="inputs" v-model.number="transport.plane"/> 
+                <label for="transport-type">Transport Type:</label>
+                <select id="transport-type" required v-model="transport.type">
+                    <option v-for="(carbon, label, index) in transportTypes" :key="index" :value="label">{{label}}</option>
+                </select>
+
+                <label for="transport-quantity">Quantity (miles):</label>
+                <input type="number" required id="transport-quantity" class="inputs" v-model.number="transport.quantity"/> 
 
                 <input type="submit" value="Submit Transport" class="transport-input-button" id="save"/>     
             </form>
             </div>
          </section>
 
-           <button class="button" v-if="!diet.status" v-on:click="handleClickDiet">Diet</button>
          <section>
             <div class="diet-form base-form" v-if="diet.status">
         
             <form class="diet" v-on:submit="addDietData" method="post">
                 <label for="diet-select" id="small-heading"> Select a Diet Type</label>
 
-                <select name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
-                    <option v-for="(carbon,label,index) in diets" :key="index" :value="{[label]:carbon}"> {{label}} </option>
+                <select required name="diet-select" id="diet-select" class="inputs-diet" v-model="selectedDiet">
+                    <option v-for="(carbon,label,index) in diets" :key="index" :value="label"> {{label}} </option>
                 </select>
           
                 <input type="submit" value="Submit Diet" class="diet-input-button" id="save" />
@@ -36,22 +39,19 @@
             </form>
             </div>
          </section>
-           <button class="button" v-if="!energy.status" v-on:click="handleClickEnergy()">Energy</button>
+
          <section>
            <div class="energy-form base-form" v-if="energy.status">
                 <p id="small-heading">Enter amount of energy used</p>
-            <form class="energy" v-on:submit="addEnergyData" method="post">
-                <label for="electricity">Electricity</label>
-                <input type="number" id="electricity"  class="inputs" v-model.number="electricity"/>
-             
-                <label for="gas">Gas</label>
-                <input type="number" id="gas" class="inputs" v-model.number="gas"/>
-
-                <label for="oil">Oil</label>
-                <input type="number" id="oil" class="inputs" v-model.number="oil"/>
-
-                <input  type="submit" value="Submit Energy" class="energy-input-button" id="save" />
-            </form>
+                <form class="energy" v-on:submit="addEnergyData" method="post">
+                   <label for="energy-type">Energy</label>
+                   <select  id="energy-type"required v-model="energy.type">
+                     <option v-for="(carbon, label, index) in energyTypes" :key="index" :value="label">{{label}}</option> 
+                   </select>
+                   <label for="enrgy-quantity">Quantity (kWh):</label>
+                   <input type="number" required id="energy-quantity" class="inputs" v-model.number="energy.quantity"/> 
+                   <input  type="submit" value="Submit Energy" class="energy-input-button" id="save" />
+                </form>
             </div>
          </section>
 
@@ -71,20 +71,19 @@ export default {
     data(){
         return{
             diets: [],
+            transportTypes: [],
+            energyTypes: [],
             selectedDiet: null,
 
             transport: {
-                car: 0,
-                train: 0,
-                bus: 0,
-                plane: 0,
+                quantity: 0,
+                type: null,
                 status: false
-                },
+            },
 
             energy: {
-                electricity: 0,
-                gas: 0,
-                oil: 0,
+                quantity: 0,
+                type: null,
                 status: false
             },
 
@@ -104,40 +103,43 @@ export default {
         addTransportData(evt){
             evt.preventDefault()
             const transport = {
-                car: this.transport.car,
-                train: this.transport.train,
-                bus: this.transport.bus,
-                plane: this.transport.plane
+                label: this.transport.type,
+                quantity: this.transport.quantity,
+                unit: "mile(s)"
             }
+        
             userData.postUserData(transport)
-            .then(res => eventBus.$emit('user-emissions', res))
+            .then(res => eventBus.$emit('transport-emissions', res))
             this.transport = {
-                car: 0,
-                train: 0,
-                bus: 0,
-                plane: 0,
+                label: null,
+                quantity: 0,
                 status: false
-                }
+            }
         },
         addEnergyData(evt){
             evt.preventDefault()
-            const energy = {
-                electricity: this.electricity,
-                gas: this.gas,
-                oil: this.oil
+            const energy = { 
+                label: this.energy.type,
+                quantity: this.energy.quantity,
+                unit: "kWh",
             }
+        
             userData.postUserData(energy)
-            .then(res => eventBus.$emit('user-emissions', res))
+            .then(res => eventBus.$emit('energy-emissions', res))
             this.energy = {
-                electricity: 0,
-                gas: 0,
+                label: null,
+                quantity: 0,
                 status: false
             }
         },
         addDietData(evt){
             evt.preventDefault()
-            userData.postUserData(this.selectedDiet)
-            .then(res => eventBus.$emit('user-emissions', res))
+            userData.postUserData({
+                label: this.selectedDiet,
+                quantity: 1,
+                unit: "day"
+            })
+            .then(res => eventBus.$emit('diet-emissions', res))
             this.diet = {
                 status: false
             }
@@ -156,11 +158,13 @@ export default {
             .then(res => eventBus.$emit('diet-selected', this.factor, index, res))
         },
 
-        getDietEmissionFactors() {
+        getEmissionFactors() {
             fetch("http://localhost:3000/api/emission/")
             .then(res => res.json())
             .then(data => {
-                this.diets = data[0].food
+                this.diets = data[0].diet
+                this.transportTypes = data[0].transport
+                this.energyTypes = data[0].energy
             })
         }
 
@@ -168,7 +172,7 @@ export default {
         
     },
     mounted() {
-        this.getDietEmissionFactors();
+        this.getEmissionFactors();
         
     },
     
@@ -202,15 +206,22 @@ export default {
     margin:0;
 }
 
-.inputs{
+#transport-type{
     border: 1px gainsboro solid;
     padding: 7px;
     border-radius: 7px;
 }
 
+
+.inputs{
+    border: 1px gainsboro solid;
+    padding: 7px 50px;
+    border-radius: 7px;
+}
+
 .inputs-diet{
     border: 1px gainsboro solid;
-    padding: 7px 30px;
+    padding: 7px;
     border-radius: 7px;
 }
 
@@ -277,12 +288,20 @@ export default {
    border: none;
    border-radius: 7px;
    color: #fff;
-   padding: 7px 10px;
+   padding: 7px 30px;
    background-color: #319e2f;
  }
 
  .button:hover{
      background-color: #288632;
+ }
+
+ #button-container{
+     margin-top: 30px;
+     margin-bottom: 30px;
+     display: flex;
+     flex-flow: row wrap;
+     justify-content: space-around;
  }
  #small-heading{
      font-weight: bold;

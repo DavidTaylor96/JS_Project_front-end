@@ -1,8 +1,6 @@
 <template>
-  <article v-if="factors">
+  <article  v-if="factors">
       <emission-details v-for="(data, index) in emissionData" :key="index" :data="data" :factor="factors"></emission-details>
-     
-     
   </article>
 </template>
 
@@ -40,7 +38,19 @@ export default {
       userData.getUserData()
         .then(result => this.emissionData = result)
 
-      eventBus.$on("user-emissions", (data) => {
+      eventBus.$on("transport-emissions", (data) => {
+            this.emissionData.push(data)
+        })
+      userData.getUserData()
+        .then(result => this.emissionData = result)
+
+      eventBus.$on("energy-emissions", (data) => {
+            this.emissionData.push(data)
+        })
+      userData.getUserData()
+        .then(result => this.emissionData = result)
+
+      eventBus.$on("diet-emissions", (data) => {
             this.emissionData.push(data)
         })
 

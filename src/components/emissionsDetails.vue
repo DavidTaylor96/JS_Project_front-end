@@ -1,45 +1,10 @@
 <template>
     <article class="wrapper">
-       <div class="data-wrap" v-if="data" >
-            <h4 class="detail-text">Transport</h4>
+        <div class="data-wrap">
             <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p v-if="data.car" class="display-data"><i id="icon" class="fa fa-car"></i> {{data.car}} miles <span class="total">{{carTotal}}kg</span></p>
-            <p v-if="data.car" class="emission">Co2</p>
-            <p v-if="data.train" class="display-data"><i id="icon" class="fa fa-subway"></i> {{data.train }} miles <span class="total">{{trainTotal}}kg</span></p>
-            <p class="emission" v-if="data.train">Co2</p>
-            <p v-if="data.bus" class="display-data"><i id="icon" class="fa fa-bus"></i> {{data.bus}} miles <span class="total">{{busTotal}}kg</span></p>
-            <p class="emission" v-if="data.bus">Co2</p>
-            <p v-if="data.plane" class="display-data"><i id="icon" class="fa fa-plane"></i> {{data.plane}} miles <span class="total">{{planeTotal}}kg</span></p>
-            <p class="emission" v-if="data.plane">Co2</p>
-            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit"></i>Update</button> -->
+            <p class="display-data"><i id="icon" :class="['fa', typeIcon]"></i> {{data.label}} x {{data.quantity}} {{data.unit}} <span class="total">{{emissionTotal}}kg</span></p>
+            <p class="emission">Co2</p>
         </div>
-        <div class="data-wrap" v-if="data">
-            <h4 class="detail-text">Food</h4>
-            <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p v-if="data.highMeat" class="display-data"><i id="icon" class="fa fa-hamburger"></i> High Meat <span class="total">{{factor.food.highMeat}}kg</span></p>
-            <p v-if="data.highMeat" class="emission">Co2</p>
-            <p v-if="data.lowMeat" class="display-data"><i id="icon" class="fa fa-bacon"></i> Low Meat <span class="total">{{factor.food.lowMeat}}kg</span></p>
-            <p v-if="data.lowMeat" class="emission">Co2</p>
-            <p v-if="data.mediumMeat" class="display-data"><i id="icon" class="fa fa-drumstick-bite"></i> Medium Meat <span class="total">{{factor.food.mediumMeat}}kg</span></p>
-            <p v-if="data.mediumMeat" class="emission">Co2</p>
-            <p v-if="data.pescatarian" class="display-data"><i id="icon" class="fa fa-fish"></i> Pescatarian <span class="total">{{factor.food.pescatarian}}kg</span></p>
-            <p v-if="data.pescatarian" class="emission">Co2</p>
-            <p v-if="data.vegetarian" class="display-data">Vegetarian <span class="total">{{factor.food.vegetarian}}kg</span></p>
-            <p v-if="data.vegetarian" class="emission">Co2</p>
-            <p v-if="data.vegan" class="display-data"><i id="icon" class="fa fa-apple-alt"></i> Vegan <span class="total">{{factor.food.vegan}}kg</span></p>
-            <p v-if="data.vegan" class="emission">Co2</p>
-            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button> -->
-        </div>
-
-        <div class="data-wrap" v-if="data">
-            <h4 class="detail-text">Energy Usage</h4>
-            <button type="button" class="delete-button" v-on:click="deleteUserData">&#9587;</button>
-            <p v-if="data.electricity" class="display-data"><i id="icon" class="fa fa-bolt"></i> Electricity {{data.electricity}} kWh <span class="total">{{electricityTotal}}kg</span></p>
-            <p v-if="data.electricity" class="emission">Co2</p>
-            <p v-if="data.gas" class="display-data"><i id="icon" class="fa fa-burn"></i> Gas {{data.gas}} kWh <span class="total">{{gasTotal}}kg</span></p>
-            <p v-if="data.gas" class="emission">Co2</p>
-            <!-- <button type="button" class="update-button" v-on:click="updateUserData"><i class="fa fa-edit">Update</i></button> -->
-        </div>    
     </article>
 </template>
 
@@ -47,7 +12,6 @@
 
 import{eventBus} from '@/main.js'
 import userData from '@/services/userData'
-import emissionsFactors from '@/services/emissionsDataServices'
 
 export default {
     name: 'emission-details',
@@ -56,60 +20,38 @@ export default {
         deleteUserData() {
             userData.deleteUserData(this.data._id)
             .then(() => eventBus.$emit('userData-deleted', this.data._id))
-        },
-        updateUserData() {
-            userData.updateUserData(this.data._id)
-            .then(() => eventBus.$emit('userData-updated', this.data._id))
         }
     },
     computed: {
-        carTotal(){
-            let total = this.data.car * this.factor.transport.car
-            if (this.data.car){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
+        emissionTotal() {
+            return (this.factorTypes[this.data.label] * this.data.quantity).toFixed(1)
         },
-        trainTotal(){
-            let total = this.data.train * this.factor.transport.train
-            if (this.data.train){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
+        typeIcon() {
+            const icons = {
+                'car': 'fa-car',
+                'bus': 'fa-bus',
+                'train': 'fa-subway',
+                'plane': 'fa-plane',
+                'lowMeat': 'fa-bacon',
+                'mediumMeat': 'fa-drumstick-bite',
+                'pescatarian': 'fa-fish',
+                'highMeat': 'fa-hamburger',
+                'vegan': 'fa-leaf',
+                'vegetarian': 'fa-apple-alt',
+                "electricity": 'fa-bolt',
+                'gas': 'fa-burn'
+            }
+            return icons[this.data.label]
         },
-        busTotal(){
-            let total = this.data.bus * this.factor.transport.bus
-            if (this.data.bus){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
-        },
-        planeTotal(){
-            let total = this.data.plane * this.factor.transport.plane
-            if (this.data.plane){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
-        },
-        electricityTotal(){
-            let total = this.data.electricity * this.factor.energy.electricity
-            if (this.data.electricity){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
-        },
-         gasTotal(){
-            let total = this.data.gas * this.factor.energy.gas
-            if (this.data.gas){
-                return `${total.toFixed(2)}`}else{
-                    return "No Data Entered"
-                }
+        factorTypes() {
+            const factorClone = {...this.factor}
+            delete factorClone._id
+
+            return Object.values(factorClone).reduce((acc, factorObject) => {
+                return {...acc, ...factorObject}
+            }, {})
         },
     },
-    components: { 
-      'emission-factors': emissionsFactors,
-      'user-data': userData
-      },
 }
 </script>
 
@@ -139,6 +81,7 @@ export default {
 .data-wrap{
     border-bottom: 1px gainsboro solid;
     margin: 5px;
+    padding: 5px;
     border-radius: 10px;
     background-color: whitesmoke;
 }
