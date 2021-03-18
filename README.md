@@ -1,29 +1,17 @@
 # client
 
 ## Project setup
+Install dependencies in the client folder
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+
+Run Vue development enviroment (leave running in a terminal window). Within clinet folder:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Using
+The application is running on port 8080 so vist http://localhost:8080/
