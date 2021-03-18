@@ -1,4 +1,4 @@
-# client
+# Client
 
 ## Project setup
 Install dependencies in the client folder
@@ -8,7 +8,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 
-Run Vue development enviroment (leave running in a terminal window). Within clinet folder:
+Run Vue development enviroment (leave running in a terminal window). Within client folder:
 ```
 npm run serve
 ```
