@@ -134,7 +134,7 @@ export default {
                 quantity: 0,
                 status: false
             }
-        },
+        },cd
         addDietData(evt){
             evt.preventDefault()
             userData.postUserData({
